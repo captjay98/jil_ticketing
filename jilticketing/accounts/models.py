@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
+#from django.conf import settings
+
 #from uuid import uuid4
 
 
@@ -10,25 +12,31 @@ def default_profile_image_path(self):
 def default_profile_image(self):
     return "default_images/default_image.png"
 
-    
+
 # Create your models here.
 class MyAccountManager(BaseUserManager):
 
-    def create_user(self, email, username, password=None):
+    def create_user(self, first_name, last_name, email, username,
+                    phone_number, date_of_birth, state , password=None):
         if not email:
             raise ValueError("Email Required")
         if not username:
             raise ValueError("Username Required  ")
         user = self.model(
+            first_name=first_name,
+            last_name=last_name,
             email=self.normalize_email(email),
             username=username,
+            phone_number=phone_number,
+            date_of_birth= date_of_birth,
+            state=state
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
     
     def create_superuser(self, email, username, password=None):
-        user = self.create_user(
+        user = self.model(
             email=self.normalize_email(email),
             username=username,
             password=password,
@@ -79,3 +87,4 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
      
+#User = settings.AUTH_USER_MODEL

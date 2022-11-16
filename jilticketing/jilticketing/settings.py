@@ -27,11 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = "account.USER"
-AUTHENTICATION_BACKEND = (
-    "django.contrib.auth.backends.AllowAllUserModelBackend",
+AUTH_USER_MODEL = "accounts.USER"
+'''AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
     "accounts.backends.CaseInsensitiveModelBackend"
-)
+)'''
 # Application definition
 
 INSTALLED_APPS = [
