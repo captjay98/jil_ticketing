@@ -56,7 +56,7 @@ class User(AbstractBaseUser):
     username        = models.CharField(verbose_name="username", max_length=50, unique=True)
     email           = models.EmailField(verbose_name="email", max_length=50, unique=True)
     phone_number    = models.CharField(verbose_name="phone number", max_length=50, blank=True, null=True, unique=True)
-    date_of_birth   = models.DateTimeField(verbose_name='Date of Birth', null=True, blank=True)
+    date_of_birth   = models.DateField(verbose_name='Date of Birth', null=True, blank=True)
     state           = models.CharField(verbose_name="state", max_length=50)
     
     date_joined     = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
