@@ -1,8 +1,8 @@
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User
+from .models import (Booking, Departure, Destination, Ticket, TicketType, Trip,
+                     User)
 
 # Register your models here.
 
@@ -15,5 +15,16 @@ class User_Admin(UserAdmin):
     list_filter = ()
     fieldsets = ()
     
-    
 admin.site.register(User, User_Admin)
+    
+admin.site.register(Booking)
+
+admin.site.register(Ticket)
+
+admin.site.register(TicketType)
+
+admin.site.register(Trip)
+
+admin.site.register(Departure)
+
+admin.site.register(Destination)

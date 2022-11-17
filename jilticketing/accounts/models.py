@@ -1,9 +1,11 @@
+from unicodedata import name
+from uuid import uuid4
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 #from django.conf import settings
 
-#from uuid import uuid4
 
 
 def default_profile_image_path(self):
@@ -88,3 +90,65 @@ class User(AbstractBaseUser):
         return True
      
 #User = settings.AUTH_USER_MODEL
+
+
+class Booking(models.Model):
+
+    user_id = models.ForeignKey('User', related_name='users', on_delete=models.DO_NOTHING)
+    ticket_id = models.ForeignKey('Ticket', related_name='tickets', on_delete=models.DO_NOTHING)
+    #delivery_email = models.ForeignKey()
+    def __str__(self):
+       return f"{self.user_id} {self.ticket_id}"
+    
+class Ticket(models.Model):
+
+   serial_number = models.UUIDField(default=uuid4)
+   generated_at = models.DateTimeField(auto_now_add=True)
+   expires_at = models.DateTimeField()
+   ticket_type_id = models.ForeignKey('TicketType', related_name='ticket_types', on_delete=models.DO_NOTHING)
+   trip_id = models.ForeignKey('Trip', related_name='trips', on_delete=models.DO_NOTHING)
+   
+   def __str__(self):
+       return f"{self.ticket_type_id}"
+
+class TicketType(models.Model):
+    #name = models.CharField(max_length=50)
+    seat_class = models.CharField(max_length=50)
+    seat = models.IntegerField()
+    price = models.IntegerField()
+    trip_id = models.ForeignKey('Trip',related_name='trip' , on_delete=models.DO_NOTHING)
+    
+    def __str__(self):
+        return f"{str(self.trip_id)} {self.seat_class}"
+    
+class Trip(models.Model):
+
+    name = models.CharField(max_length=50)
+    date = models.DateTimeField()
+    departure_id = models.ForeignKey('Departure', related_name='departures', on_delete=models.DO_NOTHING)
+    destination_id = models.ForeignKey('Destination', related_name='destinations', on_delete=models.DO_NOTHING)
+    def __str__(self):
+        return f" {self.departure_id}  to  {self.destination_id}"
+
+class Departure(models.Model):
+
+    location = models.CharField(max_length=50)
+    departure_time = models.DateTimeField()
+    
+    def __str__(self):
+        return self.location
+    
+    def returnlocation(self):
+        return self.location
+
+class Destination(models.Model):
+
+    location = models.CharField(max_length=50)
+    arrival_time = models.DateTimeField()
+    
+    def __str__(self):
+        return self.location
+    
+    def returnlocation(self):
+        return self.location
+    
