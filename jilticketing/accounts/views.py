@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import (Booking, Ticket, TicketType, Trip,
-                     User)
+from django.shortcuts import redirect, render
+
+from .models import Booking, Ticket, TicketType, Trip, User
 
 # Create your views here.
 
@@ -129,14 +129,6 @@ def ScheduleView(request):
         return redirect('book')
 
     return render(request, 'trips.html', context)
-
-
-def TripChoiceView(request):
-    pass
-
-
-def TicketChoiceView(request):
-    pass
 
 
 @login_required(login_url='login')
