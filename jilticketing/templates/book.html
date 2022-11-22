@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<div class="errorcodes">
+  <style>
+    .errorcodes {
+      background-color:black;
+      color:red;
+    }
+  </style>
+  {% for message in messages %}
+      <h3 style="color:red">{{ message }}</h3>
+  {% endfor %}
+</div>
+
+  <h1>TICKETS</h1>
+  <form action='' method="post">
+  {% csrf_token %}
+
+<fieldset>
+  <h1>SELECT TRIP</h1>
+  {% for tickettype in tickettypes %}
+      <input type="radio" name="tickettype"  value="{{tickettype.id}}">
+      <label for="info">{{tickettype.id}}</br>{{tickettype.trip_id}}  {{tickettype.seat_class}}</br>
+        seat {{tickettype.seat}} for {{tickettype.price}}</label>
+
+      </br>
+      </br>
+      </hr>
+      </br>
+      </br>
+      {% endfor %}
+</fieldset>
+<input type="submit" value="Submit">
+
+
+{% endblock content %}
+
+

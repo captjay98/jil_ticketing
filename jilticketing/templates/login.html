@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<div class="errorcodes">
+  <style>
+    .errorcodes {
+      background-color:black;
+      color:red;
+    }
+  </style>
+  {% for message in messages %}
+      <h3 style="color:red">{{ message }}</h3>
+  {% endfor %}
+</div>
+
+<section>
+      <h5>Login</h5>
+      <form action="" method="POST">
+        {% csrf_token %}
+
+
+          <input type="email" name="email" placeholder="Enter your email" required>
+          <br />
+
+          <input type="password" name="password" placeholder="Enter Password" required>
+
+          <br />
+        
+          <input type="submit" value="Login" style="background-image:linear-gradient(to bottom right, #009FFD, #2A2A72);
+                 height: 50px; text-align:center;margin:auto; display:block;">
+</section>
+  
+{% endblock content %}

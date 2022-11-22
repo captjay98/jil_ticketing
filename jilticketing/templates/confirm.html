@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<div class="errorcodes">
+  <style>
+    .errorcodes {
+      background-color:black;
+      color:red;
+    }
+  </style>
+  {% for message in messages %}
+      <h3 style="color:red">{{ message }}</h3>
+  {% endfor %}
+</div>
+
+  
+
+<h1>TRIP DETAILS</h1>
+{% for info in ticketconfirmation %}
+    <h4>{{info}} on {{info.trip.date}}
+    </h4>
+{% endfor %}
+
+
+ <h1>BOOKING CONFIRMATION</h1>
+{% for book in bookingconfirmation %}
+     <h3>{{book.user}}</h3>
+    <h3>{{book.ticket}}</h3>
+{% endfor %}
+
+ {% endblock content %}
+
