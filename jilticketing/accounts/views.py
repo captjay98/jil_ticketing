@@ -111,6 +111,11 @@ def ProfileView(request):
 
 
 def ScheduleView(request):
+    """
+    Displays the schedule
+    and allows user to choose=AutoPairsSpace()
+    their trip
+    """
     trips = Trip.objects.all()
     context = {"trips": trips}
 
@@ -136,6 +141,10 @@ def TicketChoiceView(request):
 
 @login_required(login_url='login')
 def BookingView(request):
+    """
+    Books a ticket of choice
+    for the user
+    """
     trip_choice = request.session.get('trip')
     trip_choice = int(trip_choice)
 
@@ -167,6 +176,9 @@ def BookingView(request):
 
 @login_required(login_url='login')
 def ConfirmView(request):
+    """
+    Shows the booking information
+    """
     ticketclass = request.session.get('ticket')
     ticketclass = int(ticketclass)
     tripchoice = request.session.get('trip')
@@ -182,36 +194,3 @@ def ConfirmView(request):
                "bookingconfirmation": bookingconfirm}
 
     return render(request, 'confirm.html', context)
-
-    """
-
-    ticket_choice = request.GET.get('ticket_choice')
-    trip_choice = request.GET.get('trip_id')
-
-    tickettype = TicketType.objects.filter(seat_class=ticket_choice,
-                                           trip_id=trip_choice)
-
-    trip = Trip.objects.filter(location=trip_choice)
-
-    ticket = Ticket.objects.create(user_id=request.user,
-                                   seat_class=tickettype,
-                                   )
-    ticket.save()
-    booking = Booking.objects.create(user_id=request.user)
-    booking.save(
-
-        )
-    if request.method == 'POST':
-        ticket = request.POST.get("Ticket")
-        day = request.POST.get("day")
-        depart = request.POST.get("depart")
-        arrive = request.POST.get("arrive")
-
-
-        request.session["day"] = day
-        request.session["ticket"] = ticket
-        request.session["depart"] = depart
-        request.session["arrive"] = arrive
-        '''
-    return HttpResponse(booking)
-    """
