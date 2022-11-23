@@ -26,8 +26,11 @@
 
  <h1>BOOKING CONFIRMATION</h1>
 {% for book in bookingconfirmation %}
-     <h3>{{book.user}}</h3>
-    <h3>{{book.ticket}}</h3>
+    <h3>{{book.user}}</h3>
+    <h3>{{book.ticket.trip.departure}} to {{book.ticket.trip.destination}}</h3>
+    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
+    <h3>{{book.ticket.seat}}</h3>
+    <h3>{{book.ticket.trip.date}}</h3>
 {% endfor %}
 
  {% endblock content %}
