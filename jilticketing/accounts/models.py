@@ -51,6 +51,12 @@ class MyAccountManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    """
+    A custom User class
+    derived from Abstract Base User
+    uses the  EMAIL for login
+    instead of username
+    """
     first_name      = models.CharField(verbose_name="first name",
                                        max_length=50)
     last_name       = models.CharField(verbose_name="last name", max_length=50)
@@ -101,7 +107,9 @@ class User(AbstractBaseUser):
 
 
 class Booking(models.Model):
-
+    """
+    Defines the Booking Table
+    """
     user = models.ForeignKey('User', related_name='users',
                              on_delete=models.DO_NOTHING)
     ticket = models.ForeignKey('Ticket', related_name='tickets',
@@ -113,15 +121,22 @@ class Booking(models.Model):
 
 
 class Ticket(models.Model):
-
+    """
+    Defines the ticket Table
+    """
     serial_number = models.UUIDField(default=uuid4)
     generated_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField(null=True, blank=True)
+    seat = models.IntegerField()
     ticket_type = models.ForeignKey('TicketType',
                                     related_name='ticket_types',
                                     on_delete=models.DO_NOTHING)
     trip = models.ForeignKey('Trip', related_name='trips',
                              on_delete=models.DO_NOTHING)
+    
+    Business = 1
+    Economy = 6
+
 
     def __str__(self):
         return (f"{self.trip.departure} to {self.trip.destination}\
@@ -129,23 +144,26 @@ class Ticket(models.Model):
 
 
 class TicketType(models.Model):
+    """
+    Defines the Ticket Types table
+    """
     # name = models.CharField(max_length=50)
     id = models.AutoField(primary_key=True)
     seat_class = models.CharField(max_length=50)
-    seat = models.IntegerField()
     price = models.IntegerField()
     trip = models.ForeignKey('Trip', related_name='trip',
                              on_delete=models.DO_NOTHING)
 
-    business = 0
-    economy = 0
-
+   
     def __str__(self):
-        return f"{str(self.trip_id)} {self.seat_class}"
+        return f"{str(self.id)} {self.trip.departure} to {self.trip.destination}\
+            {self.seat_class}"
 
 
 class Trip(models.Model):
-
+    """
+    Defines the Trips table
+    """
     name = models.CharField(max_length=50)
     date = models.DateTimeField()
     departure = models.ForeignKey('Departure', related_name='departures',
@@ -155,11 +173,13 @@ class Trip(models.Model):
                                     on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f" {self.departure_id}  to  {self.destination_id}"
+        return f" {self.departure}  to  {self.destination}"
 
 
 class Departure(models.Model):
-
+    """
+    Defines the Departure Table
+    """
     location = models.CharField(max_length=50)
     departure_time = models.DateTimeField()
 
@@ -171,7 +191,9 @@ class Departure(models.Model):
 
 
 class Destination(models.Model):
-
+    """
+    Defines the Destination Table
+    """
     location = models.CharField(max_length=50)
     arrival_time = models.DateTimeField()
 
