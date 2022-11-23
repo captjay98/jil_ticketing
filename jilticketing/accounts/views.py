@@ -91,6 +91,13 @@ def LoginView(request):
 
 @login_required(login_url='login')
 def LogoutView(request):
+    """
+    logs out the active user
+    Args:
+        request (request): a user request
+    Returns:
+        redirect: a user to the homepage
+    """
     logout(request)
     return redirect("home")
 
@@ -101,9 +108,12 @@ def ProfileView(request):
     displays user information
     and previous bookings
     plus current if there is any.
+
+    Returns:
+        render: a page with the user information
     """
     user = request.user
-    bookings = Booking.objects.filter(user_id=user.user_id)
+    bookings = Booking.objects.filter(user_id=user.id)
 
     context = {'bookings': bookings, 'user': user}
 
@@ -114,7 +124,7 @@ def ScheduleView(request):
     """
     Displays the schedule
     and allows user to choose=AutoPairsSpace()
-    their trip
+    their trip`
     """
     trips = Trip.objects.all()
     context = {"trips": trips}
@@ -146,12 +156,48 @@ def BookingView(request):
         ticket_choice = request.POST.get('tickettype')
         ticket_choice = int(ticket_choice)
         request.session['ticket'] = ticket_choice
+        # hhgayixx pwcu rdrc
+        
+        if trip_choice == 3:
+            if ticket_choice % 2 != 0:
+                if Ticket.kdEconomy == 11:
+                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                else:
+                    Ticket.kdEconomy += 1
+                    seat = Ticket.kdEconomy
+                    
+            elif ticket_choice % 2 == 0:
+                if Ticket.kdBusiness == 6:
+                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                Ticket.kdBusiness += 1
+                seat = Ticket.kdBusiness
+            else:
+                messages.info(request, "Invalid Ticket Code")
+        
+        elif trip_choice == 4:
+            if ticket_choice % 2 != 0:
+                if Ticket.knEconomy == 11:
+                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                else:
+                    Ticket.knEconomy += 1
+                    seat = Ticket.knEconomy
+                    
+            elif ticket_choice % 2 == 0:
+                if Ticket.knBusiness == 6:
+                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                Ticket.knBusiness += 1
+                seat = Ticket.knBusiness
+            else:
+                messages.info(request, "Invalid Ticket Code")
+        else:
+            messages.info(request, "Invalid Trip")
 
         print("TICKET TYPE ID IS :", request.session['ticket'],
               type(ticket_choice))
 
         ticket = Ticket.objects.create(ticket_type_id=ticket_choice,
-                                       trip_id=trip_choice)
+                                       trip_id=trip_choice,
+                                       seat=seat)
         ticket.save()
 
         booking = Booking.objects.create(user_id=request.user.id,
@@ -159,7 +205,7 @@ def BookingView(request):
 
         booking.save()
         messages.success(request, "Please confirm your booking info and"
-                         " download ticket on the next page")
+                         " download ticket")
         return redirect("confirm")
 
     context = {"tickettypes": tickettypes}
@@ -178,11 +224,10 @@ def ConfirmView(request):
 
     print("TICKETCLASS ID", ticketclass, type(ticketclass))
     print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
+    # filter the bookings by ascendig order and pick out the latest
+    # ticketconfirm = Ticket.objects.all() "ticketconfirmation": ticketconfirm,
+    bookingconfirm = Booking.objects.filter(user_id=request.user.id)
 
-    ticketconfirm = Ticket.objects.all()
-    bookingconfirm = Booking.objects.all()
-
-    context = {"ticketconfirmation": ticketconfirm,
-               "bookingconfirmation": bookingconfirm}
+    context = {"bookingconfirmation": bookingconfirm}
 
     return render(request, 'confirm.html', context)
