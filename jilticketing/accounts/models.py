@@ -134,8 +134,11 @@ class Ticket(models.Model):
     trip = models.ForeignKey('Trip', related_name='trips',
                              on_delete=models.DO_NOTHING)
     
-    Business = 1
-    Economy = 6
+    kdBusiness = 0
+    kdEconomy = 5
+    
+    knBusiness = 0
+    knEconomy = 5
 
 
     def __str__(self):
@@ -173,7 +176,7 @@ class Trip(models.Model):
                                     on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f" {self.departure}  to  {self.destination}"
+        return f"{self.id} {self.departure}  to  {self.destination}"
 
 
 class Departure(models.Model):
