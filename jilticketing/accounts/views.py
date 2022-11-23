@@ -70,7 +70,7 @@ def RegisterView(request):
             return redirect("registration")
 
     else:
-        return render(request, 'register.html')
+        return render(request, 'accounts/register.html')
 
 
 def LoginView(request):
@@ -86,7 +86,7 @@ def LoginView(request):
             messages.info(request, "Incorrect email or password")
             return redirect("login")
     else:
-        return render(request, 'login.html')
+        return render(request, 'accounts/login.html')
 
 
 @login_required(login_url='login')
@@ -117,7 +117,7 @@ def ProfileView(request):
 
     context = {'bookings': bookings, 'user': user}
 
-    return render(request, 'profile.html', context)
+    return render(request, 'accounts/profile.html', context)
 
 
 def ScheduleView(request):
@@ -138,7 +138,7 @@ def ScheduleView(request):
         messages.success(request, "Select a Ticket Type")
         return redirect('book')
 
-    return render(request, 'trips.html', context)
+    return render(request, 'accounts/trips.html', context)
 
 
 @login_required(login_url='login')
@@ -209,7 +209,7 @@ def BookingView(request):
         return redirect("confirm")
 
     context = {"tickettypes": tickettypes}
-    return render(request, 'book.html', context)
+    return render(request, 'accounts/book.html', context)
 
 
 @login_required(login_url='login')
@@ -230,4 +230,4 @@ def ConfirmView(request):
 
     context = {"bookingconfirmation": bookingconfirm}
 
-    return render(request, 'confirm.html', context)
+    return render(request, 'accounts/confirm.html', context)
