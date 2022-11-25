@@ -1,5 +1,5 @@
 {% extends "main.html" %}
-
+{% load static %}
 {% block content %}
 
 
@@ -15,25 +15,25 @@
   {% endfor %}
 </div>
 
-<form action='' method="post">
-  {% csrf_token %}
-<fieldset>
-  <h1>SELECT TRIP</h1>
+<section class="trips">
+  <form action='' method="post">  
+    {% csrf_token %}
+    <fieldset>
+      <h1>SELECT TRIP</h1>
       {% for trip in trips %}
-      <input type="radio" name="trip"  value="{{trip.id}}">
-      <label for="trip">{{trip.name}} on {{trip.date}}</label>
-      {% endfor %}
-</fieldset>
-<input type="submit" value="Submit">
-
-</form>
-
- <section>
-      <h1>book</h1>
-      {% for ticket in tickets %}
-      <input type="radio" name="ticketype" id="ticket{{forloop.counter}}" value="{{ticket.id}}">
-      <label for="ticket{{forloop.counter}}">{{ticket.seat_class}} {{ticket.trip_id}} {{ticket.price}}</label>
-      {% endfor %}
+      <div class="selection">
+        <p>From</p>
+        <p>{{trip.departure}}</p>
+        <p>To</p>
+        <p>{{trip.destination}}</p>
+      </div>
+        <p>On</p>
+        <p>{{trip.date}}</p>
+        <input type="radio" name="trip"  value="{{trip.id}}">
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Submit">
+  </form>
 </section>
   
 {% endblock content %}

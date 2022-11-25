@@ -1,6 +1,7 @@
-{% load static %}
+
 {% extends "main.html" %}
 
+{% load static %}
 {% block content %}
 
 
@@ -18,21 +19,30 @@
 
 <h1>{{user.username}} PROFILE</h1>
 
-    <h3>{{user.first_name}} {{user.last_name}}</h3>
-    <h3>{{user.username}}</h3>
-    <h3>{{user.email}}</h3>
-    <h3>{{user.phone_number}}</h3>
-    <h3>{{user.date_of_birth}}</h3>
-    <h3>{{user.state}}</h3>
-    <h3>{{user.date_joined}}</h3>
+<h5>Full Name</h5>
+<p>{{user.first_name}} {{user.last_name}}</p>
+<h4>Username</h4>
+<p>{{user.username}}</p>
+<h4>Email</h4>
+<p>{{user.email}}</p>
+<h4>Phone Number</h4>
+<p>{{user.phone_number}}</p>
+<h4>Date of Birth</h4>
+<p>{{user.date_of_birth}}</p>
+<h4>State</h4>
+<p>{{user.state}}</p>
+<h4>Date Joined</h4>
+<p>{{user.date_joined}}</p>
+    
+   
+    
 
 
+
+<h3> Previous Bokings </h3>
 {% for book in bookings %}
-    <h3>{{book.user}}</h3>
-    <h3>{{book.ticket.trip.departure}} to {{book.ticket.trip.destination}}</h3>
-    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
-    <h3>{{book.ticket.seat}}</h3>
-    <h3>{{book.ticket.trip.date}}</h3>
+    <h3>{{book}}</h3>
+
 {% endfor %}
 
  {% endblock content %}

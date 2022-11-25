@@ -19,12 +19,13 @@
   <form action='' method="post">
   {% csrf_token %}
 
-<fieldset>
-  <h1>SELECT TRIP</h1>
+<section class="booking">
+  <h1>SELECT CLASS</h1>
   {% for tickettype in tickettypes %}
+  <h4>{{tickettype.trip.name}}</h4>
+  <h4>{{tickettype.seat_class}}</h4>
+  <h5>{{ticket.seat}} {{tickettype.price}}</h5>
       <input type="radio" name="tickettype"  value="{{tickettype.id}}">
-      <label for="info">{{tickettype.id}}</br>{{tickettype.trip_id}}  {{tickettype.seat_class}}</br>
-        seat {{tickettype.seat}} for {{tickettype.price}}</label>
 
       </br>
       </br>
@@ -32,7 +33,7 @@
       </br>
       </br>
       {% endfor %}
-</fieldset>
+    </section>
 <input type="submit" value="Submit">
 
 

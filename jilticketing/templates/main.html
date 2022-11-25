@@ -6,23 +6,35 @@
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <title>JIL TICKETING</title>
     <meta name="viewport" content="width=device-width", initial-scale=1>
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'accounts/styles/index.css' %}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'index.css' %}">
     <!--<cript src="main.js"></script> -->
 </head>
 <body>
     <header>
-    <li>
-        <ul><a href="{% url 'home' %}">Home</a></ul>
-        <ul><a href="{% url 'registration' %}">Register</a></ul>
-        <ul><a href="{% url 'login' %}">login</a></ul>  
-        <ul><a href="{% url 'trips' %}">Schedules</a></ul> 
-    </li>
+        <div class="logo">
+            <h1>JIL TICKETING</h1>
+        </div>
+
+        <div class="navbar">
+            <li>
+                <ul><a href="{% url 'home' %}">Home</a></ul>
+                <ul><a href="{% url 'trips' %}">Trips</a></ul>
+                <ul><a href="{% url 'profile' %}">Profile</a></ul>
+                <!--<ul><a href="{% url 'registration' %}">Register</a></ul>-->
+                <ul><a href="{% url 'login' %}">login</a></ul>  
+        
+            </li>
+        </div>
     </header>
-    <h1>Hello {{user.username}}, Welcome to JIL TICKETING. </h1> 
-    {% block content %}
+<section class="infobar">
+    <h1>Hello {{user.username}},</br> Welcome to JIL TICKETING. </h1> 
+</section>
+{% block content %}
 
-    {% endblock content %}
-
+{% endblock content %}
+<footer>
+    <h3> This is the footer </h3>
+</footer>
  <style>
  </style>
 </body>

@@ -1,0 +1,203 @@
+body {
+    background-color: darkgrey
+}
+
+header {
+    background-color: blue;
+    width: 100%;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    height: 100px;
+}
+
+.logo {
+    background-color: grey;
+    width: 40%;
+    height: 100px;
+    margin-left: 3%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: auto;
+    float: left;
+}
+
+.logo h1 {
+    text-align: center;
+    font-size: larger;
+    display: flex;
+    justify-content: flex;
+    padding: 25px;
+}
+
+
+.navbar {
+    background-color: chartreuse;
+    width: 50%;
+    height: 100%;
+    margin-right: 3%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 1%;
+    text-align: center;
+    float: right;
+}
+
+
+.navbar li {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+
+
+.infobar {
+    background-color: rgb(20, 199, 199);
+    width: 90%;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.container {
+    background-color: cadetblue;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.col {
+    flex-wrap: wrap;
+    height: 250px;
+    width: 30%;
+    margin: auto;
+    justify-content: center;
+    background-color: brown;
+    border: 2px dashed peru;
+    text-align: center;
+}
+
+footer {
+    height: 200px;
+    background-color: bisque;
+}
+
+.trips {
+    background-color: cornflowerblue;
+}
+
+.selection {
+    background-color: aquamarine;
+}
+
+.booking {
+    background-color: antiquewhite;
+}
+
+.confirmation {
+    background-color: white;
+    color: black;
+    width: 90%;
+    margin: auto;
+}
+
+/* 
+flex-direction: column;
+*/
+
+@media(max-width:500px) {
+    body {
+        width: 100%;
+        background-color: burlywood;
+    }
+
+    .header {
+        width: 80%;
+        margin: auto;
+        margin-top: 5px;
+        padding-top: 5px;
+    }
+
+    .logo {
+        width: 30%;
+        height: 90%;
+        display: flex;
+    }
+
+    .logo h1 {
+        font-size: small;
+        justify-content: end;
+        padding: 20px;
+    }
+
+    .navbar {
+        width: 60%;
+        height: 90%;
+        display: flex;
+        margin-right: 10px;
+
+    }
+
+    .navbar li {
+        flex-wrap: wrap;
+        width: 80%;
+        font-size: small;
+        margin: auto;
+    }
+
+    .infobar {
+        width: 80%;
+        margin: auto;
+
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+        height: 500px;
+    }
+
+    .col {
+        width: 90%;
+        height: 150px;
+        justify-content: space-around;
+
+    }
+
+    .trips {
+        width: 90%;
+        margin: auto;
+        margin-top: 40px;
+
+    }
+
+    .selection {
+        background-color: aquamarine;
+        width: 90%;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .booking {
+        background-color: antiquewhite;
+        width: 90%;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .confirmation {
+        background-color: white;
+        color: black;
+        width: 90%;
+        margin: auto;
+    }
+
+}

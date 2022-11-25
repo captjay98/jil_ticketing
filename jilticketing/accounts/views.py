@@ -15,7 +15,7 @@ def home(request):
     available to logged in users
     """
     # name = User.objects.all()
-    return render(request, 'main.html')
+    return render(request, 'accounts/home.html')
 
 
 def RegisterView(request):
@@ -123,7 +123,7 @@ def ProfileView(request):
 def ScheduleView(request):
     """
     Displays the schedule
-    and allows user to choose=AutoPairsSpace()
+    and allows user to choose
     their trip`
     """
     trips = Trip.objects.all()
@@ -139,6 +139,26 @@ def ScheduleView(request):
         return redirect('book')
 
     return render(request, 'accounts/trips.html', context)
+
+
+"""
+def SeatCheck(trip, ticket, seattype):
+    if trip == trip:
+        if ticket % 2 != 0:
+            if seattype == 11:
+                print("Sorry we are out of Economy Tickets")
+            else:
+                seattype += 1
+                seat = seattype
+
+        elif ticket % 2 == 0:
+            if seattype == 6:
+                print("Sorry we are out of Business Tickets")
+            else:
+                seattype += 1
+                seat = seattype
+    return seat
+"""
 
 
 @login_required(login_url='login')
@@ -157,34 +177,38 @@ def BookingView(request):
         ticket_choice = int(ticket_choice)
         request.session['ticket'] = ticket_choice
         # hhgayixx pwcu rdrc
-        
+
         if trip_choice == 3:
             if ticket_choice % 2 != 0:
                 if Ticket.kdEconomy == 11:
-                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                    messages.info(request,
+                                  "Sorry, We are Out of Economy Tickets")
                 else:
                     Ticket.kdEconomy += 1
                     seat = Ticket.kdEconomy
-                    
+
             elif ticket_choice % 2 == 0:
                 if Ticket.kdBusiness == 6:
-                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                    messages.info(request,
+                                  "Sorry, We are Out of Business Tickets")
                 Ticket.kdBusiness += 1
                 seat = Ticket.kdBusiness
             else:
                 messages.info(request, "Invalid Ticket Code")
-        
+
         elif trip_choice == 4:
             if ticket_choice % 2 != 0:
                 if Ticket.knEconomy == 11:
-                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                    messages.info(request,
+                                  "Sorry, We are Out of Economy Tickets")
                 else:
                     Ticket.knEconomy += 1
                     seat = Ticket.knEconomy
-                    
+
             elif ticket_choice % 2 == 0:
                 if Ticket.knBusiness == 6:
-                    messages.info(request, "Sorry, We are Out of Economy Tickets")
+                    messages.info(request,
+                                  "Sorry, We are Out of Business Tickets")
                 Ticket.knBusiness += 1
                 seat = Ticket.knBusiness
             else:

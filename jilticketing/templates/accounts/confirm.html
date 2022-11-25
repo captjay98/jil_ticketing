@@ -1,5 +1,5 @@
 {% extends "main.html" %}
-
+{% load static %}
 {% block content %}
 
 
@@ -16,22 +16,28 @@
 </div>
 
   
-
-<h1>TRIP DETAILS</h1>
-{% for info in ticketconfirmation %}
-    <h4>{{info}} on {{info.trip.date}}
-    </h4>
-{% endfor %}
-
-
+<section class="confirmation">
  <h1>BOOKING CONFIRMATION</h1>
 {% for book in bookingconfirmation %}
-    <h3>{{book.user}}</h3>
-    <h3>{{book.ticket.trip.departure}} to {{book.ticket.trip.destination}}</h3>
+    <p><h3>{{book.ticket.trip.departure}}----->{{book.ticket.trip.destination}}</h3></p>
+    <p>Departure Time</p>
+    <h3>{{book.ticket.trip.departure.departure_time}}</h3>
+    <p>Arrival Time</p>
+    <h3>{{book.ticket.trip.destination.arrival_time}}</h3>
+    <p>Passenger Name</p>
+    <h3>{{book.user.username}}</h3>
+    <p>Class</p>
     <h3>{{book.ticket.ticket_type.seat_class}}</h3>
+    <p>Seat>
     <h3>{{book.ticket.seat}}</h3>
-    <h3>{{book.ticket.trip.date}}</h3>
+    <p>Date</p>
+    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
+
+    
+    
+    
 {% endfor %}
 
+</section>
  {% endblock content %}
 
