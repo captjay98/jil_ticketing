@@ -131,12 +131,15 @@ def ScheduleView(request):
 
     if request.method == 'POST':
         trip_choice = request.POST.get('trip')
-        trip_choice = int(trip_choice)
-
-        request.session['trip'] = trip_choice
-        print("TRIP CHOICE ID IS", trip_choice, type(trip_choice))
-        messages.success(request, "Select a Ticket Type")
-        return redirect('book')
+        
+        if trip_choice is not None:
+            trip_choice = int(trip_choice)
+            request.session['trip'] = trip_choice
+            print("TRIP CHOICE ID IS", trip_choice, type(trip_choice))
+            # messages.success(request, "Select a Ticket Type")
+            return redirect('book')
+        else:
+            messages.info(request, "Please Select a Trip")
 
     return render(request, 'accounts/trips.html', context)
 
@@ -174,63 +177,66 @@ def BookingView(request):
 
     if request.method == 'POST':
         ticket_choice = request.POST.get('tickettype')
-        ticket_choice = int(ticket_choice)
-        request.session['ticket'] = ticket_choice
-        # hhgayixx pwcu rdrc
-
-        if trip_choice == 3:
-            if ticket_choice % 2 != 0:
-                if Ticket.kdEconomy == 11:
-                    messages.info(request,
-                                  "Sorry, We are Out of Economy Tickets")
-                else:
-                    Ticket.kdEconomy += 1
-                    seat = Ticket.kdEconomy
-
-            elif ticket_choice % 2 == 0:
-                if Ticket.kdBusiness == 6:
-                    messages.info(request,
-                                  "Sorry, We are Out of Business Tickets")
-                Ticket.kdBusiness += 1
-                seat = Ticket.kdBusiness
-            else:
-                messages.info(request, "Invalid Ticket Code")
-
-        elif trip_choice == 4:
-            if ticket_choice % 2 != 0:
-                if Ticket.knEconomy == 11:
-                    messages.info(request,
-                                  "Sorry, We are Out of Economy Tickets")
-                else:
-                    Ticket.knEconomy += 1
-                    seat = Ticket.knEconomy
-
-            elif ticket_choice % 2 == 0:
-                if Ticket.knBusiness == 6:
-                    messages.info(request,
-                                  "Sorry, We are Out of Business Tickets")
-                Ticket.knBusiness += 1
-                seat = Ticket.knBusiness
-            else:
-                messages.info(request, "Invalid Ticket Code")
+        if ticket_choice is None:
+            messages.info(request, "Please Select a Ticket")
         else:
-            messages.info(request, "Invalid Trip")
+            ticket_choice = int(ticket_choice)
+            request.session['ticket'] = ticket_choice
+            # hhgayixx pwcu rdrc
 
-        print("TICKET TYPE ID IS :", request.session['ticket'],
-              type(ticket_choice))
+            if trip_choice == 3:
+                if ticket_choice % 2 != 0:
+                    if Ticket.kdEconomy == 11:
+                        messages.info(request,
+                                    "Sorry, We are Out of Economy Tickets")
+                    else:
+                        Ticket.kdEconomy += 1
+                        seat = Ticket.kdEconomy
 
-        ticket = Ticket.objects.create(ticket_type_id=ticket_choice,
-                                       trip_id=trip_choice,
-                                       seat=seat)
-        ticket.save()
+                elif ticket_choice % 2 == 0:
+                    if Ticket.kdBusiness == 6:
+                        messages.info(request,
+                                    "Sorry, We are Out of Business Tickets")
+                    Ticket.kdBusiness += 1
+                    seat = Ticket.kdBusiness
+                else:
+                    messages.info(request, "Invalid Ticket Code")
 
-        booking = Booking.objects.create(user_id=request.user.id,
-                                         ticket_id=ticket.id)
+            elif trip_choice == 4:
+                if ticket_choice % 2 != 0:
+                    if Ticket.knEconomy == 11:
+                        messages.info(request,
+                                    "Sorry, We are Out of Economy Tickets")
+                    else:
+                        Ticket.knEconomy += 1
+                        seat = Ticket.knEconomy
 
-        booking.save()
-        messages.success(request, "Please confirm your booking info and"
-                         " download ticket")
-        return redirect("confirm")
+                elif ticket_choice % 2 == 0:
+                    if Ticket.knBusiness == 6:
+                        messages.info(request,
+                                    "Sorry, We are Out of Business Tickets")
+                    Ticket.knBusiness += 1
+                    seat = Ticket.knBusiness
+                else:
+                    messages.info(request, "Invalid Ticket Code")
+            else:
+                messages.info(request, "Invalid Trip")
+
+            print("TICKET TYPE ID IS :", request.session['ticket'],
+                type(ticket_choice))
+
+            ticket = Ticket.objects.create(ticket_type_id=ticket_choice,
+                                        trip_id=trip_choice,
+                                        seat=seat)
+            ticket.save()
+
+            booking = Booking.objects.create(user_id=request.user.id,
+                                            ticket_id=ticket.id)
+
+            booking.save()
+            messages.success(request, "Please confirm your booking info and"
+                            " download ticket")
+            return redirect("confirm")
 
     context = {"tickettypes": tickettypes}
     return render(request, 'accounts/book.html', context)
@@ -250,7 +256,7 @@ def ConfirmView(request):
     print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
     # filter the bookings by ascendig order and pick out the latest
     # ticketconfirm = Ticket.objects.all() "ticketconfirmation": ticketconfirm,
-    bookingconfirm = Booking.objects.filter(user_id=request.user.id)
+    bookingconfirm = Booking.objects.filter(user_id=request.user.id)[:1]
 
     context = {"bookingconfirmation": bookingconfirm}
 

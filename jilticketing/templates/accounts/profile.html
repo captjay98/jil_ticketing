@@ -39,10 +39,13 @@
 
 
 
-<h3> Previous Bokings </h3>
-{% for book in bookings %}
-    <h3>{{book}}</h3>
-
+<h3> Previous Bookings </h3>
+{% for booking in bookings %}
+    <h3>{{booking}}</h3>
+    <h3>{{booking.ticket.trip.departure}} to {{booking.ticket.trip.destination}}</h3>
+    <h3>{{booking.ticket.ticket_type.seat_class}}</h3>
+    <h3>{{booking.ticket.seat}}</h3>
+    <h3>{{booking.ticket.trip.date}}</h3>
 {% endfor %}
 
  {% endblock content %}

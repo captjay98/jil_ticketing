@@ -2,12 +2,16 @@
 
 {% block content %}
 
+<section class="infobar">
+  <h1>Hello {{user.username}},</br> SELECT YOUR TICKET AND BOOK.</h1> 
+</section>
 
 <div class="errorcodes">
   <style>
     .errorcodes {
       background-color:black;
-      color:red;
+      color:blue;
+      width: 80%;
     }
   </style>
   {% for message in messages %}
@@ -15,26 +19,28 @@
   {% endfor %}
 </div>
 
-  <h1>TICKETS</h1>
+
   <form action='' method="post">
   {% csrf_token %}
-
-<section class="booking">
   <h1>SELECT CLASS</h1>
+<section class="booking">
+  
   {% for tickettype in tickettypes %}
+
+  <div class="tickets">
   <h4>{{tickettype.trip.name}}</h4>
   <h4>{{tickettype.seat_class}}</h4>
   <h5>{{ticket.seat}} {{tickettype.price}}</h5>
       <input type="radio" name="tickettype"  value="{{tickettype.id}}">
-
-      </br>
-      </br>
+  </div>
       </hr>
-      </br>
       </br>
       {% endfor %}
     </section>
-<input type="submit" value="Submit">
+    <div class="submission">
+      <input type="submit" value="Book" class="submitbutton">
+    </div>
+
 
 
 {% endblock content %}

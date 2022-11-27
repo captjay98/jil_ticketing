@@ -1,9 +1,9 @@
 body {
-    background-color: darkgrey
+    background-color: black;
+    color: white;
 }
 
 header {
-    background-color: blue;
     width: 100%;
     margin-bottom: 50px;
     padding-bottom: 25px;
@@ -12,7 +12,6 @@ header {
 }
 
 .logo {
-    background-color: grey;
     width: 40%;
     height: 100px;
     margin-left: 3%;
@@ -32,7 +31,6 @@ header {
 
 
 .navbar {
-    background-color: chartreuse;
     width: 50%;
     height: 100%;
     margin-right: 3%;
@@ -57,21 +55,28 @@ header {
 
 .infobar {
     background-color: rgb(20, 199, 199);
+    border-radius: 50px;
     width: 90%;
-    margin-right: 20px;
+    margin: auto;
     padding: 20px;
+    margin-bottom: 20px;
+
 }
 
 .container {
     background-color: cadetblue;
+    border-radius: 50px;
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 300px;
     margin-top: 50px;
+    margin: auto;
     margin-bottom: 50px;
+    padding: 20px;
 }
 
 .col {
+    border-radius: 50px;
     flex-wrap: wrap;
     height: 250px;
     width: 30%;
@@ -84,31 +89,116 @@ header {
 
 footer {
     height: 200px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+    ;
+    border-radius: 50px;
     background-color: bisque;
+    text-align: center;
+    padding: 20px;
 }
 
 .trips {
     background-color: cornflowerblue;
+    width: 90%;
+    margin: auto;
+    border-radius: 50px;
+    padding: 20px;
+    display: flex;
+
 }
 
-.selection {
-    background-color: aquamarine;
+.trip {
+    width: 100px;
+    border-radius: 50px;
+    border-style: dashed;
+    margin-bottom: 10px;
+    background-color: black;
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+
 }
+
+.dateselect {
+    background-color: bisque;
+    width: 90%;
+    margin: auto;
+    border-radius: 50px;
+    padding-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.submission {
+    background-color: antiquewhite;
+    color: white;
+    text-align: center;
+    width: 30%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 50px;
+
+}
+
+.submitbutton {
+    background-color: aqua;
+    width: 90%;
+    height: 50px;
+    font-size: large;
+    margin: auto;
+
+
+
+}
+
 
 .booking {
     background-color: antiquewhite;
+    color: black;
+    width: 90%;
+    margin: auto;
+    border-radius: 50px;
+    padding: 20px;
+    display: flex;
+}
+
+.tickets {
+    background-color: aqua;
+    border-radius: 50px;
+    width: 25%;
+    padding: 20px;
+    margin: auto;
+    margin: 20px;
+    text-align: center;
 }
 
 .confirmation {
     background-color: white;
     color: black;
     width: 90%;
+    padding: 20px;
     margin: auto;
+    border-radius: 50px;
+    margin-bottom: 20px;
+
+
 }
+
+.confirm {
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
 
 /* 
 flex-direction: column;
 */
+
 
 @media(max-width:500px) {
     body {
@@ -116,36 +206,40 @@ flex-direction: column;
         background-color: burlywood;
     }
 
-    .header {
-        width: 80%;
+    header {
+        width: 90%;
         margin: auto;
-        margin-top: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         padding-top: 5px;
+        padding-bottom: 10px;
     }
 
     .logo {
         width: 30%;
         height: 90%;
         display: flex;
+        margin-left: 20px;
     }
 
     .logo h1 {
         font-size: small;
         justify-content: end;
         padding: 20px;
+
     }
 
     .navbar {
-        width: 60%;
+        width: 50%;
         height: 90%;
         display: flex;
-        margin-right: 10px;
+        margin-right: 30px;
 
     }
 
     .navbar li {
         flex-wrap: wrap;
-        width: 80%;
+        width: 90%;
         font-size: small;
         margin: auto;
     }
@@ -153,15 +247,18 @@ flex-direction: column;
     .infobar {
         width: 80%;
         margin: auto;
+        margin-bottom: 20px;
+        text-align: center;
 
     }
 
     .container {
         display: flex;
         flex-direction: column;
-        width: 90%;
+        width: 80%;
         margin: auto;
         margin-top: 20px;
+        margin-bottom: 20px;
         height: 500px;
     }
 
@@ -173,31 +270,58 @@ flex-direction: column;
     }
 
     .trips {
+        background-color: grey;
+    }
+
+    .trip {
+        background-color: black;
+        color: aliceblue;
         width: 90%;
         margin: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-width: 0px;
+        border-radius: 60px;
+        margin-bottom: 20px;
         margin-top: 40px;
-
     }
 
     .selection {
-        background-color: aquamarine;
-        width: 90%;
+        background-color: black;
+        color: aliceblue;
+        width: 80%;
         margin: auto;
-        margin-top: 40px;
+        border-radius: 50px;
+        padding-left: 40px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
     }
+
 
     .booking {
         background-color: antiquewhite;
         width: 90%;
         margin: auto;
         margin-top: 40px;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
     }
 
     .confirmation {
         background-color: white;
         color: black;
-        width: 90%;
+        width: 80%;
+        padding: 20px;
         margin: auto;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    footer {
+        width: 80%;
     }
 
 }

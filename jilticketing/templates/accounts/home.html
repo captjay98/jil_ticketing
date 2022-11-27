@@ -2,25 +2,24 @@
 {% load static %}
 
 {% block content %}
+<section class="infobar">
+    <h1>Hello {{user.username}},</br> Welcome to JIL TICKETING. </h1> 
+</section>
+
 <section class=container>
-    
     <div class="col one">
-        <a href="{% url 'trips' %}"><h3>Trips</h3></a>
-        
+        <a href="{% url 'trips' %}"><h3>Trips</h3></a>  
         <p>Follow this link to checkout the schedule </br>
         for the next one week. and start a booking.</p>
     </div>
-
     <div class="col two">
         <a href="{% url 'profile' %}" ><h3>Profile</h3></a>
         <p>Click here to go to your profile and check your bookings.</p>
     </div>
-
     <div class="col three">
         <a href="{% url 'registration' %}"><h3>Sign Up!</h3>
         <p>Not Registered yet? sign up here.</p>
     </div>
-
 </section>
 
 {% endblock content %}

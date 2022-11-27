@@ -1,41 +1,51 @@
 {% extends "main.html" %}
 {% load static %}
 {% block content %}
+<section class="infobar">
+    <h1>Hello {{user.username}},</br> HERE IS YOUR BOOKING CONFIRMATION. </h1> 
+</section>
 
-
-<div class="errorcodes">
-  <style>
-    .errorcodes {
-      background-color:black;
-      color:red;
-    }
-  </style>
-  {% for message in messages %}
-      <h3 style="color:red">{{ message }}</h3>
-  {% endfor %}
+<section class="confirmation">
+    <h2>BOOKING CONFIRMATION</h2>
+{% for book in bookingconfirmation %}
+<div class="confirm">
+    <p><h3>{{book.ticket.trip.departure}}----->{{book.ticket.trip.destination}}</h3></p>
 </div>
 
-  
-<section class="confirmation">
- <h1>BOOKING CONFIRMATION</h1>
-{% for book in bookingconfirmation %}
-    <p><h3>{{book.ticket.trip.departure}}----->{{book.ticket.trip.destination}}</h3></p>
+<!--<div class="confirm">
+    <p>Date</p>
+    <h3>{{book.ticket.trip.date}}</h3>
+</div>-->
+
+<div class="confirm">
     <p>Departure Time</p>
     <h3>{{book.ticket.trip.departure.departure_time}}</h3>
+</div>
+
+<div class="confirm">
     <p>Arrival Time</p>
     <h3>{{book.ticket.trip.destination.arrival_time}}</h3>
+</div>
+
+<div class="confirm">
     <p>Passenger Name</p>
     <h3>{{book.user.username}}</h3>
+</div>
+
+<div class="confirm">
     <p>Class</p>
     <h3>{{book.ticket.ticket_type.seat_class}}</h3>
-    <p>Seat>
+</div>
+
+<div class="confirm">
+    <p>Seat</p>
     <h3>{{book.ticket.seat}}</h3>
-    <p>Date</p>
-    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
+</div>
+
+
 
     
-    
-    
+
 {% endfor %}
 
 </section>

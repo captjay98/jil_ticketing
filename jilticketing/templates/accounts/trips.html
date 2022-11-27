@@ -1,6 +1,11 @@
 {% extends "main.html" %}
+
 {% load static %}
+
 {% block content %}
+<section class="infobar">
+  <h1>Hello {{user.username}},</br>SELECT YOUR TRIP. </h1> 
+</section>
 
 
 <div class="errorcodes">
@@ -18,22 +23,20 @@
 <section class="trips">
   <form action='' method="post">  
     {% csrf_token %}
-    <fieldset>
-      <h1>SELECT TRIP</h1>
       {% for trip in trips %}
-      <div class="selection">
-        <p>From</p>
-        <p>{{trip.departure}}</p>
-        <p>To</p>
-        <p>{{trip.destination}}</p>
-      </div>
-        <p>On</p>
-        <p>{{trip.date}}</p>
+
+    <div class="trip">
+        <p>From {{trip.departure}} To {{trip.destination}}</p>
         <input type="radio" name="trip"  value="{{trip.id}}">
+        <p>{{trip.date}}</p>
+    </div>
+      
         {% endfor %}
-    </fieldset>
-    <input type="submit" value="Submit">
-  </form>
 </section>
+<div class="submission">
+  <input type="submit" value="Select" class="submitbutton">
+</div>
+
   
+
 {% endblock content %}
