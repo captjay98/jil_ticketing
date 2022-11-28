@@ -8,7 +8,6 @@ from .models import Booking, Ticket, TicketType, Trip, User
 # Create your views here.
 
 
-@login_required(login_url='login')
 def home(request):
     """
     Returns the Homescreen only
@@ -256,7 +255,7 @@ def ConfirmView(request):
     print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
     # filter the bookings by ascendig order and pick out the latest
     # ticketconfirm = Ticket.objects.all() "ticketconfirmation": ticketconfirm,
-    bookingconfirm = Booking.objects.filter(user_id=request.user.id)[:1]
+    bookingconfirm = Booking.objects.filter(user_id=request.user.id).order_by('-id')[:1]
 
     context = {"bookingconfirmation": bookingconfirm}
 
