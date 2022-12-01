@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="en">
+
 <head>
+<<<<<<< HEAD
     <meta charset="utf-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <title>JIL TICKETING</title>
     <meta name="viewport" content="width=device-width", initial-scale=1>
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/index.css' %}">
     <!--<cript src="main.js"></script> -->
+=======
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jil Ticketing</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- custom js file link  -->
+    <script src="{% static 'js/app.js' %}" defer></script>
+
+>>>>>>> miyyahhhh
 </head>
+
 <body>
-    <header>
-        <div class="logo">
-            <h1>JIL TICKETING</h1>
+
+    <!-- header section starts  -->
+
+    <header class="header">
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <a data-aos="zoom-in-left" data-aos-delay="150" href="#" class="logo"><span>🌍J</span>il <span>T</span>icketing
+        </a>
+
+        <div class="nav">
+            <a data-aos="zoom-in-left" data-aos-delay="300" href="{% url 'home' %}">Home</a>
+            <a data-aos="zoom-in-left" data-aos-delay="450" href=>about us</a>
+            <a data-aos="zoom-in-left" data-aos-delay="750" href="{% url 'trips' %}">Trips</a>
+            <a data-aos="zoom-in-left" data-aos-delay="600" href="{% url 'profile' %}">Profile</a>
         </div>
+<<<<<<< HEAD
         <div class="navbar">
             <li>
                 <ul><a href="{% url 'home' %}">Home</a></ul>
@@ -24,14 +58,79 @@
         
             </li>
         </div>
+=======
+
+        <a data-aos="zoom-in-left" data-aos-delay="1300" href="{% url 'login' %}" class="btn">Login</a>
+
+>>>>>>> miyyahhhh
     </header>
 
 {% block content %}
 
 {% endblock content %}
-<footer>
-    <h3> This is the footer </h3>
-</footer>
- <style>
- </style>
+    <!-- footer section starts  -->
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box" data-aos="fade-up" data-aos-delay="150">
+                <a href="#" class="logo"> <span>J</span>il <span>T</span>icketing </a>
+                <p> We Aim To Provide A Hassle-Free Experience By Offering A Simple And User-Friendly Platform.</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box" data-aos="fade-up" data-aos-delay="300">
+                <h3>quick links</h3>
+                <a href="#home" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="#about" class="links"> <i class="fas fa-arrow-right"></i> about </a>
+                <a href="#destination" class="links"> <i class="fas fa-arrow-right"></i> destination </a>
+                <a href="#services" class="links"> <i class="fas fa-arrow-right"></i> trips </a>
+                <a href="#gallery" class="links"> <i class="fas fa-arrow-right"></i> Login </a>
+                <a href="#blogs" class="links"> <i class="fas fa-arrow-right"></i> register </a>
+            </div>
+
+            <div class="box" data-aos="fade-up" data-aos-delay="450">
+                <h3>contact info</h3>
+                <p> <i class="fas fa-map"></i> Lagos, Nigeria </p>
+                <p> <i class="fas fa-phone"></i> +2348088636134 </p>
+                <p> <i class="fas fa-envelope"></i> jilticketing@mail.com </p>
+                <p> <i class="fas fa-clock"></i> 7:00am - 10:00pm </p>
+            </div>
+
+            <div class="box" data-aos="fade-up" data-aos-delay="600">
+                <h3>newsletter</h3>
+                <p>subscribe for latest updates</p>
+                <form action="">
+                    <input type="email" name="" placeholder="enter your email" class="email" id="">
+                    <input type="submit" value="subscribe" class="btn">
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="credit">Coded by <span>Jil Ticketing</span> | all rights reserved!</div>
+
+    <!-- footer section ends -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+
+        AOS.init({
+            duration: 800,
+            offset: 150,
+        });
+
+    </script>
+
 </body>
