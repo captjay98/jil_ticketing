@@ -28,7 +28,7 @@ def home(request):
             
             return redirect("trips")
 
-        return render(request, 'accounts/home.html')
+        return render(request, 'accounts/reghome.html')
     # name = User.objects.all()
     else:
         return render(request, 'accounts/defaulthome.html')

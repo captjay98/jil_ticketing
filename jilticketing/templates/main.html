@@ -3,14 +3,6 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-compatible" content="IE=edge">
-    <title>JIL TICKETING</title>
-    <meta name="viewport" content="width=device-width", initial-scale=1>
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/index.css' %}">
-    <!--<cript src="main.js"></script> -->
-=======
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +19,6 @@
     <!-- custom js file link  -->
     <script src="{% static 'js/app.js' %}" defer></script>
 
->>>>>>> miyyahhhh
 </head>
 
 <body>
@@ -47,22 +38,9 @@
             <a data-aos="zoom-in-left" data-aos-delay="750" href="{% url 'trips' %}">Trips</a>
             <a data-aos="zoom-in-left" data-aos-delay="600" href="{% url 'profile' %}">Profile</a>
         </div>
-<<<<<<< HEAD
-        <div class="navbar">
-            <li>
-                <ul><a href="{% url 'home' %}">Home</a></ul>
-                <ul><a href="{% url 'trips' %}">Trips</a></ul>
-                <ul><a href="{% url 'profile' %}">Profile</a></ul>
-                <a href="{% url 'registration' %}">Register</a></ul>-->
-                <ul><a href="{% url 'login' %}">login</a></ul>  
-        
-            </li>
-        </div>
-=======
 
         <a data-aos="zoom-in-left" data-aos-delay="1300" href="{% url 'login' %}" class="btn">Login</a>
 
->>>>>>> miyyahhhh
     </header>
 
 {% block content %}
