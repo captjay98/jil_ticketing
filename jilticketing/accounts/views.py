@@ -9,12 +9,29 @@ from .models import Booking, Ticket, TicketType, Trip, User
 
 
 def home(request):
+    user = User()
     """
     Returns the Homescreen only
     available to logged in users
     """
+    
+    
+    if user.is_authenticated:
+        if request.method == "POST":
+            departure = request.POST.get("departure")
+            destination = request.POST.get("destination")
+            date = request.post.get("date")
+            
+            request.session["departure"] = departure
+            request.session["destination"] = destination
+            request.session["date"] = date
+            
+            return redirect("trips")
+
+        return render(request, 'accounts/home.html')
     # name = User.objects.all()
-    return render(request, 'accounts/home.html')
+    else:
+        return render(request, 'accounts/defaulthome.html')
 
 
 def RegisterView(request):
@@ -33,7 +50,7 @@ def RegisterView(request):
         email = request.POST['email']
         phone_number = request.POST["phone_number"]
         state = request.POST["state"]
-        date_of_birth = request.POST["date_of_birth"]
+        #date_of_birth = request.POST["date_of_birth"]
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
 
@@ -130,15 +147,12 @@ def ScheduleView(request):
 
     if request.method == 'POST':
         trip_choice = request.POST.get('trip')
-        
-        if trip_choice is not None:
-            trip_choice = int(trip_choice)
-            request.session['trip'] = trip_choice
-            print("TRIP CHOICE ID IS", trip_choice, type(trip_choice))
-            # messages.success(request, "Select a Ticket Type")
-            return redirect('book')
-        else:
-            messages.info(request, "Please Select a Trip")
+        trip_choice = int(trip_choice)
+
+        request.session['trip'] = trip_choice
+        print("TRIP CHOICE ID IS", trip_choice, type(trip_choice))
+        messages.success(request, "Select a Ticket Type")
+        return redirect('book')
 
     return render(request, 'accounts/trips.html', context)
 
@@ -176,66 +190,63 @@ def BookingView(request):
 
     if request.method == 'POST':
         ticket_choice = request.POST.get('tickettype')
-        if ticket_choice is None:
-            messages.info(request, "Please Select a Ticket")
-        else:
-            ticket_choice = int(ticket_choice)
-            request.session['ticket'] = ticket_choice
-            # hhgayixx pwcu rdrc
+        ticket_choice = int(ticket_choice)
+        request.session['ticket'] = ticket_choice
+        # hhgayixx pwcu rdrc
 
-            if trip_choice == 3:
-                if ticket_choice % 2 != 0:
-                    if Ticket.kdEconomy == 11:
-                        messages.info(request,
-                                    "Sorry, We are Out of Economy Tickets")
-                    else:
-                        Ticket.kdEconomy += 1
-                        seat = Ticket.kdEconomy
-
-                elif ticket_choice % 2 == 0:
-                    if Ticket.kdBusiness == 6:
-                        messages.info(request,
-                                    "Sorry, We are Out of Business Tickets")
-                    Ticket.kdBusiness += 1
-                    seat = Ticket.kdBusiness
+        if trip_choice == 3:
+            if ticket_choice % 2 != 0:
+                if Ticket.kdEconomy == 11:
+                    messages.info(request,
+                                  "Sorry, We are Out of Economy Tickets")
                 else:
-                    messages.info(request, "Invalid Ticket Code")
+                    Ticket.kdEconomy += 1
+                    seat = Ticket.kdEconomy
 
-            elif trip_choice == 4:
-                if ticket_choice % 2 != 0:
-                    if Ticket.knEconomy == 11:
-                        messages.info(request,
-                                    "Sorry, We are Out of Economy Tickets")
-                    else:
-                        Ticket.knEconomy += 1
-                        seat = Ticket.knEconomy
-
-                elif ticket_choice % 2 == 0:
-                    if Ticket.knBusiness == 6:
-                        messages.info(request,
-                                    "Sorry, We are Out of Business Tickets")
-                    Ticket.knBusiness += 1
-                    seat = Ticket.knBusiness
-                else:
-                    messages.info(request, "Invalid Ticket Code")
+            elif ticket_choice % 2 == 0:
+                if Ticket.kdBusiness == 6:
+                    messages.info(request,
+                                  "Sorry, We are Out of Business Tickets")
+                Ticket.kdBusiness += 1
+                seat = Ticket.kdBusiness
             else:
-                messages.info(request, "Invalid Trip")
+                messages.info(request, "Invalid Ticket Code")
 
-            print("TICKET TYPE ID IS :", request.session['ticket'],
-                type(ticket_choice))
+        elif trip_choice == 4:
+            if ticket_choice % 2 != 0:
+                if Ticket.knEconomy == 11:
+                    messages.info(request,
+                                  "Sorry, We are Out of Economy Tickets")
+                else:
+                    Ticket.knEconomy += 1
+                    seat = Ticket.knEconomy
 
-            ticket = Ticket.objects.create(ticket_type_id=ticket_choice,
-                                        trip_id=trip_choice,
-                                        seat=seat)
-            ticket.save()
+            elif ticket_choice % 2 == 0:
+                if Ticket.knBusiness == 6:
+                    messages.info(request,
+                                  "Sorry, We are Out of Business Tickets")
+                Ticket.knBusiness += 1
+                seat = Ticket.knBusiness
+            else:
+                messages.info(request, "Invalid Ticket Code")
+        else:
+            messages.info(request, "Invalid Trip")
 
-            booking = Booking.objects.create(user_id=request.user.id,
-                                            ticket_id=ticket.id)
+        print("TICKET TYPE ID IS :", request.session['ticket'],
+              type(ticket_choice))
 
-            booking.save()
-            messages.success(request, "Please confirm your booking info and"
-                            " download ticket")
-            return redirect("confirm")
+        ticket = Ticket.objects.create(ticket_type_id=ticket_choice,
+                                       trip_id=trip_choice,
+                                       seat=seat)
+        ticket.save()
+
+        booking = Booking.objects.create(user_id=request.user.id,
+                                         ticket_id=ticket.id)
+
+        booking.save()
+        messages.success(request, "Please confirm your booking info and"
+                         " download ticket")
+        return redirect("confirm")
 
     context = {"tickettypes": tickettypes}
     return render(request, 'accounts/book.html', context)

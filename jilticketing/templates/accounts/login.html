@@ -1,4 +1,9 @@
 {% extends "main.html" %}
+{% load static %}
+
+<head>
+  <link rel="stylesheet" src="{% static 'styles/logreg.css' %}">
+</head>
 
 {% block content %}
 
@@ -16,20 +21,40 @@
 </div>
 
 <section>
-      <h5>Login</h5>
-      <form action="" method="POST">
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+      <form action="" method="POST" class="sign-in-form">
         {% csrf_token %}
 
-
-          <input type="email" name="email" placeholder="Enter your email" required>
-          <br />
-
-          <input type="password" name="password" placeholder="Enter Password" required>
-
-          <br />
-        
-          <input type="submit" value="Login" style="background-image:linear-gradient(to bottom right, #009FFD, #2A2A72);
-                 height: 50px; text-align:center;margin:auto; display:block;">
+        <h2 class="title">Sign in</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" />
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+            <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+              <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+          </form>
+        </div>
+        </div>
+      </div>
 </section>
   
 {% endblock content %}

@@ -1,76 +1,97 @@
-{% extends "main.html" %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles/logreg.css' %}" />
+    <title>Sign in & Sign up Form</title>
+  </head>
 
-{% block content %}
-<section class="reg">
-  <style>
-    .reg{
-      margin-left:500px;
-    }
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="" method="POST" class="sign-up-form">
+            <h2 class="title">Sign up</h2>
+            {% csrf_token %}
 
-  </style>
-  <div class="errorcodes">
-      <style>
-        .errorcodes {
-          background-color:black;
-          color:red;
-        }
-        .reg{
-          float: center;
-        }
-      </style>
-      {% for message in messages %}
-          <h3 style="color:red">{{ message }}</h3>
-      {% endfor %}
-  </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="First name"
+                id="fname", name="first_name"/>
+            </div>
 
-    <div id="registration">
-      <h5>Register</h5>
-      <form action=""  method="POST">
-        {% csrf_token %}
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Lastname"
+                id="lname" name="last_name"/>
+            </div>
 
-          <input type="text" id="fname", name="first_name" 
-          placeholder="First Name" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username"
+                id="Username" name="username"/>
+            </div>
 
-          <input type="text" id="lname"  name="last_name"
-           placeholder="Last Name" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email"
+                id="email" name="email"/>
+            </div>
 
-          <input type="tel" id="phone name=" name="phone_number"
-          placeholder="+234" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="tel" id="phone name="
+                name="phone_number" placeholder="+234" />
+            </div>
 
-          <input type="text" id="Username"
-          name="username" placeholder="Username" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="State"
+                id="state" name="state"/>
+            </div>
 
-          <input type="email" id="email" 
-          name="email" placeholder="email" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="password" placeholder="Password"
+                id="passowrd1" name="password1"/>
+            </div>
 
-          <input type="date" id="dob"
-          name="date_of_birth" placeholder="date of birth" required/>
-          <br />
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="password" placeholder="Re-enter Password"
+                id="Password2" name="password2"/>
+            </div>
 
-          <input type="text" id="state"
-          name="state" placeholder="State" required/>
-          <br />
+            <input type="submit" class="btn" value="Sign up" />
+            <p class="social-text">Or Sign up with social platforms</p>
 
-          <input type="password" id="passowrd1"
-          name="password1" placeholder="Enter Password" required />
-          <br />
-
-          <input type="password" id="Password2"
-          name="password2" placeholder="Reenter Password" required>
-          <br />
-          
- 
-
-
-          <button type="submit" style="background-image:linear-gradient(to bottom right, #009FFD, #2A2A72);
-           height: 50px;">Register</button>
-      
-      </form>
+            <div class="social-media">
+              <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</section>
-  {% endblock content %}
+
+    <footer>
+      <h3> This is the footer </h3>
+    </footer>
+    <style>
+ </style>
+  </body>
