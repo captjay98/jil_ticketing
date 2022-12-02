@@ -1,7 +1,9 @@
+from datetime import time
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.forms import CharField
 
 # from django.conf import settings
 
@@ -168,40 +170,11 @@ class Trip(models.Model):
     Defines the Trips table
     """
     name = models.CharField(max_length=50)
-    date = models.DateTimeField()
-    departure = models.ForeignKey('Departure', related_name='departures',
-                                  on_delete=models.DO_NOTHING)
-    destination = models.ForeignKey('Destination',
-                                    related_name='destinations',
-                                    on_delete=models.DO_NOTHING)
+    date = models.DateField()
+    departure = models.CharField(max_length=50)
+    departure_time = models.TimeField(default='00:00:00')
+    destination = models.CharField(max_length=50)
+    arrival_time = models.TimeField(default='00:00:00')
 
     def __str__(self):
         return f"{self.id} {self.departure}  to  {self.destination}"
-
-
-class Departure(models.Model):
-    """
-    Defines the Departure Table
-    """
-    location = models.CharField(max_length=50)
-    departure_time = models.DateTimeField()
-
-    def __str__(self):
-        return self.location
-
-    def returnlocation(self):
-        return self.location
-
-
-class Destination(models.Model):
-    """
-    Defines the Destination Table
-    """
-    location = models.CharField(max_length=50)
-    arrival_time = models.DateTimeField()
-
-    def __str__(self):
-        return self.location
-
-    def returnlocation(self):
-        return self.location

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
     <!-- custom js file link  -->
-    <script src="js/app.js" defer></script>
+    <script src="{% static 'js/app.js' %}" defer></script>
 
 </head>
 
@@ -40,12 +40,12 @@
             <a data-aos="zoom-in-left" data-aos-delay="600" href="{% url 'profile' %}">Profile</a>
         </div>
 <div>
-        <a data-aos="zoom-in-left" data-aos-delay="1300" href="{% url 'logout' %}" class="btn">Logout</a>
+        <a data-aos="zoom-in-left" data-aos-delay="1300" href="" class="btn">Logout</a>
 </div>
     </header>
 
     
-    <!-- home section starts  -->
+    <!-- home section starts-->
 
     <section class="home" id="home">
 
@@ -53,9 +53,22 @@
             <span data-aos="fade-up" data-aos-delay="150">Let's Start</span>
             <h3 data-aos="fade-up" data-aos-delay="300">Travel With Us</h3>
             <p data-aos="fade-up" data-aos-delay="450">It's not the beginning or the destination that counts. It's the ride in between...you just have to want to learn its rhythm.</p>
-            <a data-aos="fade-up" data-aos-delay="600" href="#" class="btn">Login</a>
-        </div>
 
+            <div class="errorcode">
+                <style>
+                    .errorcodes {
+                      background-color:black;
+                      color:blue;
+                      width: 25%;
+                      font-size: small;
+                    }
+                  </style>
+                  {% for message in messages %}
+                      <h3 style="color:red">{{ message }}</h3>
+                  {% endfor %}
+            </div>
+        </div>
+        
     </section>
 
     <!-- home section ends -->
@@ -63,24 +76,23 @@
     <!-- booking form section starts  -->
 
     <section class="book-form" id="book-form">
-<div class="errorcode"></div>
-        <form action="">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            
             <div data-aos="zoom-in" data-aos-delay="150" class="inputBox">
                 <span>From</span><span class="emo">🚄</span>
-                <input type="text" placeholder="place name" value="">
+                <input type="text" placeholder="DEPARTURE DESTINATION" name="departure" value="{{trips.departure}}">
             </div>
             <div data-aos="zoom-in" data-aos-delay="300" class="inputBox">
                 <span>To</span><span class="emo">🚄</span>
-                <input type="text" placeholder="place name" value="">
+                <input type="text" placeholder="ARRIVAL DESTINATION" name="destination" value="{{trips.destination}}">
             </div>
             <div data-aos="zoom-in" data-aos-delay="450" class="inputBox">
                 <span>Journey Date</span>
-                <input type="date" value="">
+                <input type="date" name="date" value="{{trip.date}}">
             </div>
-            <div data-aos="zoom-in" data-aos-delay="600" class="inputBox">
-                <span>Class</span>
-                <input type="text" placeholder="Economy or Business" value="">
-            </div>
+
             <input data-aos="zoom-in" data-aos-delay="900" type="submit" value="Search" class="btn">
         </form>
 
@@ -223,7 +235,7 @@
                 </div>
             </div>
             <div class="box">
-                <p>"They have made it so convenient to buy train prices and times."</p>
+                <p>"I Love them so much😭😭, I always get to ichiraku on time for my Ramen."</p>
                 <div class="user">
                     <img src="{% static 'img/home-images/john.jpg' %}" alt="">
                     <div class="info">

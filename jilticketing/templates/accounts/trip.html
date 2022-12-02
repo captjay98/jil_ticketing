@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="infobar">
+  <h1>Hello {{user.username}},</br>SELECT YOUR TRIP. </h1> 
+</section>
+
+
+<div class="errorcodes">
+  <style>
+    .errorcodes {
+      background-color:black;
+      color:red;
+    }
+  </style>
+  {% for message in messages %}
+      <h3 style="color:red">{{ message }}</h3>
+  {% endfor %}
+</div>
+
+<section class="trips">
+  <form action='' method="post">  
+    {% csrf_token %}
+      {% for trip in trips %}
+
+    <div class="trip">
+        <p>From {{trip.departure}} To {{trip.destination}}</p>
+        <input type="radio" name="trip"  value="{{trip.id}}">
+        <p>{{trip.date}}</p>
+    </div>
+      
+        {% endfor %}
+</section>
+<div class="submission">
+  <input type="submit" value="Select" class="submitbutton">
+</div>
+
+  
+
+{% endblock content %}

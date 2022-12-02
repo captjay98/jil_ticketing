@@ -1,6 +1,10 @@
+from http.client import HTTPResponse
+from xml.dom import ValidationErr
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.forms import ValidationError
 from django.shortcuts import redirect, render
 
 from .models import Booking, Ticket, TicketType, Trip, User
@@ -9,29 +13,36 @@ from .models import Booking, Ticket, TicketType, Trip, User
 
 
 def home(request):
-    user = User()
     """
     Returns the Homescreen only
     available to logged in users
     """
-    
+
+    user = request.user
+    trips = Trip.objects.all()
+    context = {"trip": trips}
+
     
     if user.is_authenticated:
         if request.method == "POST":
             departure = request.POST.get("departure")
             destination = request.POST.get("destination")
-            date = request.post.get("date")
+            date = request.POST.get("date")
+            
+            print("DEPARTURE::", departure)
+            print("DESTINATION::", destination)
+            print("DATE::", date)
             
             request.session["departure"] = departure
             request.session["destination"] = destination
             request.session["date"] = date
             
-            return redirect("trips")
+            return redirect("trip")
 
-        return render(request, 'accounts/reghome.html')
+        return render(request, 'accounts/reghome.html', context)
     # name = User.objects.all()
     else:
-        return render(request, 'accounts/defaulthome.html')
+        return render(request, 'accounts/home.html')
 
 
 def RegisterView(request):
@@ -136,27 +147,59 @@ def ProfileView(request):
     return render(request, 'accounts/profile.html', context)
 
 
-def ScheduleView(request):
+def TripView(request):
     """
     Displays the schedule
     and allows user to choose
     their trip`
     """
+    
     trips = Trip.objects.all()
     context = {"trips": trips}
+    
+    try:
+        departure = request.session.get("departure")
+        destination = request.session.get("destination")
+        date = request.session.get("date")
+        print("DEPARTURE::", departure)
+        print("DESTINATION::", destination)
+        print("DATE::", date)
+        if departure  == '':
+            messages.error(request, "Enter a Valid Departure Venue")
+            return redirect('home')
+        elif destination == '':
+            messages.error(request, "Enter a Valid Destination Venue")
+            return redirect('home')
+        trips = Trip.objects.filter(departure=departure,
+                                    destination=destination,
+                                    date=date
+                                    )
+        context = {"trips": trips}
+        
+    except ValidationError:
+        messages.error(request, "Enter a Valid Trip Date")
+        return redirect('home')
+        
 
     if request.method == 'POST':
         trip_choice = request.POST.get('trip')
         trip_choice = int(trip_choice)
+            
 
         request.session['trip'] = trip_choice
         print("TRIP CHOICE ID IS", trip_choice, type(trip_choice))
         messages.success(request, "Select a Ticket Type")
         return redirect('book')
+   
+    return render(request, 'accounts/trip.html', context)
 
+
+def TripsView(request):
+    trips = Trip.objects.all()
+    context = {"trips": trips}
+    
     return render(request, 'accounts/trips.html', context)
-
-
+    
 """
 def SeatCheck(trip, ticket, seattype):
     if trip == trip:
@@ -257,17 +300,24 @@ def ConfirmView(request):
     """
     Shows the booking information
     """
+    
+    '''
     ticketclass = request.session.get('ticket')
     ticketclass = int(ticketclass)
     tripchoice = request.session.get('trip')
-    tripchoice = int(tripchoice)
+    tripchoice = int(tripchoice)'''
 
-    print("TICKETCLASS ID", ticketclass, type(ticketclass))
-    print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
+    # print("TICKETCLASS ID", ticketclass, type(ticketclass))
+    # print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
     # filter the bookings by ascendig order and pick out the latest
     # ticketconfirm = Ticket.objects.all() "ticketconfirmation": ticketconfirm,
-    bookingconfirm = Booking.objects.filter(user_id=request.user.id).order_by('-id')[:1]
+    
+    if request.method == 'GET':
+        bookingconfirm = Booking.objects.filter(user_id=request.user.id).order_by('-id')[:1]
 
-    context = {"bookingconfirmation": bookingconfirm}
+        context = {"bookingconfirmation": bookingconfirm}
 
-    return render(request, 'accounts/confirm.html', context)
+        return render(request, 'accounts/confirm.html', context)
+    
+    else:
+        return HTTPResponse("You do not have an active booking, Please visit your profile and chech previous Bookings.")

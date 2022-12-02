@@ -15,7 +15,7 @@
  <body>
  <main class="ticket-system">
      <div class="top">
-     <h1 class="title">Wait a second, your ticket is being printed</h1>
+     <h1 class="title">Here's your ticket!</h1>
      {% for book in bookingconfirmation %}
      <div class="printer" />
      </div>
@@ -29,30 +29,37 @@
                  <h2>Lagos</h2>
               </div>
               <div class="details">
+
                  <div class="item">
                     <span>Passenger</span>
                  <h3>{{book.user.username}}</h3>
                  </div>
+
                  <div class="item">
                     <span>Class</span>
                     <h3>{{book.ticket.ticket_type.seat_class}}</h3>
                  </div>
+
+                 <div class="item">
+                  <span>Date</span>
+                  <h3>{{book.ticket.trip.date}}</h3>
+               </div>
+
+               <div class="item">
+                  <span>Seat</span>
+                  <h3>{{book.ticket.seat}}</h3>
+               </div>
+
                  <div class="item">
                     <span>Departure Time</span>
-                    <h3>{{book.ticket.trip.departure.departure_time}}</h3>
+                    <h3>{{book.ticket.trip.departure_time}}</h3>
                  </div>
+
                  <div class="item">
                     <span>Arrival Time</span>
-                    <h3>{{book.ticket.trip.destination.arrival_time}}</h3>
+                    <h3>{{book.ticket.trip.arrival_time}}</h3>
                  </div>
-                 <div class="item">
-                    <span>Luggage</span>
-                    <h3>Hand Luggage</h3>
-                 </div>
-                 <div class="item">
-                    <span>Seat</span>
-                    <h3>{{book.ticket.seat}}</h3>
-                 </div>
+                 
               </div>
            </div>
            <div class="receipt qr-code">
