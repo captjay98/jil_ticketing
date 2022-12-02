@@ -179,7 +179,6 @@ form.sign-in-form {
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
 }
-
 .panel {
   display: flex;
   flex-direction: column;
@@ -231,6 +230,10 @@ form.sign-in-form {
   transform: translateX(800px);
 }
 
+a{
+  text-decoration: none;
+  color: white;
+}
 /* ANIMATION */
 
 .container.sign-up-mode:before {
@@ -270,9 +273,11 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+
 @media (max-width: 870px) {
-  .container {
-    min-height: 800px;
+  
+  .container{
+    min-height: 1100px;
     height: 100vh;
   }
   .signin-signup {
@@ -281,7 +286,9 @@ form.sign-in-form {
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
   }
-
+.log{
+  margin-top: -18rem;
+}
   .signin-signup,
   .container.sign-up-mode .signin-signup {
     left: 50%;
