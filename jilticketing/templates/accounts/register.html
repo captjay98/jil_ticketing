@@ -1,97 +1,112 @@
-<!DOCTYPE html>
+{% extends 'main.html' %}
 {% load static %}
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'styles/logreg.css' %}" />
-    <title>Sign in & Sign up Form</title>
-  </head>
+{% block content %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script
+    src="https://kit.fontawesome.com/64d58efce2.js"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'styles/reg.css' %}" />
+  <title>Register/ Sign Up</title>
+</head>
 
-  <body>
-    <div class="container">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form action="" method="POST" class="sign-up-form">
-            <h2 class="title">Sign up</h2>
-            {% csrf_token %}
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form action="" method="POST" class="sign-up-form">
+          <h2 class="title">Sign up</h2>
+          {% csrf_token %}
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="First name"
-                id="fname", name="first_name"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="First name"
+              id="fname", name="first_name"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Lastname"
-                id="lname" name="last_name"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Lastname"
+              id="lname" name="last_name"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username"
-                id="Username" name="username"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username"
+              id="Username" name="username"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email"
-                id="email" name="email"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email"
+              id="email" name="email"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="tel" id="phone name="
-                name="phone_number" placeholder="+234" />
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="tel" id="phone name="
+              name="phone_number" placeholder="+234" />
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="State"
-                id="state" name="state"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="State"
+              id="state" name="state"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="password" placeholder="Password"
-                id="passowrd1" name="password1"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="password" placeholder="Password"
+              id="passowrd1" name="password1"/>
+          </div>
 
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="password" placeholder="Re-enter Password"
-                id="Password2" name="password2"/>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="password" placeholder="Re-enter Password"
+              id="Password2" name="password2"/>
+          </div>
 
-            <input type="submit" class="btn" value="Sign up" />
-            <p class="social-text">Or Sign up with social platforms</p>
+          <input type="submit" class="btn" value="Sign up" />
+          <p class="social-text">Or Sign up with social platforms</p>
 
-            <div class="social-media">
-              <a href="#" class="social-icon">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
-              <a href="#" class="social-icon">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-          </form>
-        </div>
+          <div class="social-media">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </form>
       </div>
     </div>
 
-    <footer>
-      <h3> This is the footer </h3>
-    </footer>
-    <style>
- </style>
-  </body>
+
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>Already Registered?</h3>
+          <p>
+            Follow the link below to login and book.
+          </p>
+          <button class="btn transparent" id="sign-up-btn">
+            <a href="{% url 'login' %}">Sign in</a>
+          </button>
+        </div>
+        <img src="{% static 'img/register.svg' %}" class="image up-img" alt=""
+          />
+      </div>
+
+    </div>
+  </div>
+</body>
+{% endblock content %}

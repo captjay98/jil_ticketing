@@ -1,49 +1,44 @@
-
+{% extends 'main.html' %}
 {% load static %}
+{% block content %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles/reg.css' %}" />
+    <title>Sign in & Sign up Form</title>
+  </head>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN</title>
-    <link rel="stylesheet" src="{% static 'styles/logreg.css' %}">
-     <!-- font awesome cdn link  -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-</head>
-
-
-
-
-<div class="errorcodes">
-  <style>
-    .errorcodes {
-      background-color:black;
-      color:red;
-    }
-  </style>
-  {% for message in messages %}
-      <h3 style="color:red">{{ message }}</h3>
-  {% endfor %}
-</div>
-
-<section>
-  <div class="container">
-    <div class="forms-container">
-      <div class="signin-signup">
-      <form action="" method="POST" class="sign-in-form">
-        {% csrf_token %}
-
-        <h2 class="title">Sign in</h2>
+ 
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup log">
+          <form action="" method="POST" class="sign-in-form">
+            {% csrf_token %}
+            <div class="errorcodes">
+              <style>
+              .errorcodes {
+                background-color:black;
+                color:red;
+              }
+            </style>
+              {% for message in messages %}
+              <h3 style="color:red">{{ message }}</h3>
+              {% endfor %}
+            </div>
+            <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" id="email"  name="email"/>
+              <input type="text" placeholder="Username" id="email"
+                name="email" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password", id="password" name="password" />
+              <input type="password" placeholder="Password", id="password"
+                name="password" required/>
             </div>
             <input type="submit" value="Login" class="btn solid" />
             <p class="social-text">Or Sign in with social platforms</p>
@@ -60,8 +55,29 @@
               <a href="#" class="social-icon">
                 <i class="fab fa-linkedin-in"></i>
               </a>
+            </div>
           </form>
         </div>
-        </div>
       </div>
-</section>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New Here?</h3>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+              ex ratione. Aliquid!
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              <a href="{% url 'registration' %}">Sign Up</a>
+            </button>
+          </div>
+          <img src="{% static 'img/register.svg' %}" class="image up-img" alt=""
+            />
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </body>
+
+{% endblock content %}
