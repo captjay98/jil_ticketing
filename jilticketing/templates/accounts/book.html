@@ -31,7 +31,8 @@
   <h4>{{tickettype.trip.name}}</h4>
   <h4>{{tickettype.seat_class}}</h4>
   <h5>{{ticket.seat}} {{tickettype.price}}</h5>
-      <input type="radio" name="tickettype"  value="{{tickettype.id}}">
+      <input type="radio" name="tickettype"  value="{{tickettype.id}} {{tickettype.seat_class}}"  >
+      
   </div>
       </hr>
       </br>

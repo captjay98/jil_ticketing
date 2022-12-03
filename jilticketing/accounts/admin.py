@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import (Booking, Departure, Destination, Ticket, TicketType, Trip,
-                     User)
+from .models import Booking, Ticket, TicketType, Trip, User
 
 # Register your models here.
 
@@ -48,20 +47,7 @@ admin.site.register(TicketType, TicketType_Admin)
 
 
 class Trip_Admin(admin.ModelAdmin):
-    list_display = ("id", "name", "date", "departure", "destination")
+    list_display = ("id", "name", "date", "departure", "departure_time", "destination", "arrival_time")
     search_fields = ("id", "name", "date", "departure", "destination")
     
 admin.site.register(Trip, Trip_Admin)
-
-class Departure_Admin(admin.ModelAdmin):
-    list_display = ("id", "location", "departure_time")
-    search_fields = ("id", "location", "departure_time")
-
-admin.site.register(Departure, Departure_Admin)
-
-
-class Destination_Admin(admin.ModelAdmin):
-    list_display = ("id", "location", "arrival_time")
-    search_fields = ("id", "location", "arrival_time")
-
-admin.site.register(Destination, Destination_Admin)

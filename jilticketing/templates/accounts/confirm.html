@@ -1,53 +1,79 @@
-{% extends "main.html" %}
 {% load static %}
-{% block content %}
-<section class="infobar">
-    <h1>Hello {{user.username}},</br> HERE IS YOUR BOOKING CONFIRMATION. </h1> 
-</section>
 
-<section class="confirmation">
-    <h2>BOOKING CONFIRMATION</h2>
-{% for book in bookingconfirmation %}
-<div class="confirm">
-    <p><h3>{{book.ticket.trip.departure}}----->{{book.ticket.trip.destination}}</h3></p>
-</div>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>E-ticket</title>
+     <link rel="stylesheet" href="{% static 'styles/confir.css' %}">
+      <!-- font awesome cdn link  -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ 
+ </head>
+ <body>
+ <main class="ticket-system">
+     <div class="top">
+     <h1 class="title">Here's your ticket!</h1>
+     {% for book in bookingconfirmation %}
+     <div class="printer" />
+     </div>
+     <div class="receipts-wrapper">
+        <div class="receipts">
+           <div class="receipt">
+         
+              <div class="route">
+                 <h2>Abuja</h2>
+                 <i class="fas fa-angle-right"></i>
+                 <h2>Lagos</h2>
+              </div>
+              <div class="details">
 
-<!--<div class="confirm">
-    <p>Date</p>
-    <h3>{{book.ticket.trip.date}}</h3>
-</div>-->
+                 <div class="item">
+                    <span>Passenger</span>
+                 <h3>{{book.user.username}}</h3>
+                 </div>
 
-<div class="confirm">
-    <p>Departure Time</p>
-    <h3>{{book.ticket.trip.departure.departure_time}}</h3>
-</div>
+                 <div class="item">
+                    <span>Class</span>
+                    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
+                 </div>
 
-<div class="confirm">
-    <p>Arrival Time</p>
-    <h3>{{book.ticket.trip.destination.arrival_time}}</h3>
-</div>
+                 <div class="item">
+                  <span>Date</span>
+                  <h3>{{book.ticket.trip.date}}</h3>
+               </div>
 
-<div class="confirm">
-    <p>Passenger Name</p>
-    <h3>{{book.user.username}}</h3>
-</div>
+               <div class="item">
+                  <span>Seat</span>
+                  <h3>{{book.ticket.seat}}</h3>
+               </div>
 
-<div class="confirm">
-    <p>Class</p>
-    <h3>{{book.ticket.ticket_type.seat_class}}</h3>
-</div>
+                 <div class="item">
+                    <span>Departure Time</span>
+                    <h3>{{book.ticket.trip.departure_time}}</h3>
+                 </div>
 
-<div class="confirm">
-    <p>Seat</p>
-    <h3>{{book.ticket.seat}}</h3>
-</div>
-
-
-
-    
-
-{% endfor %}
-
-</section>
- {% endblock content %}
+                 <div class="item">
+                    <span>Arrival Time</span>
+                    <h3>{{book.ticket.trip.arrival_time}}</h3>
+                 </div>
+                 
+              </div>
+           </div>
+           <div class="receipt qr-code">
+            <img src="{% static 'img/frame.png' %}" alt="" class="qr">
+              <div class="description">
+                 <h2>{{book.user.username}}</h2>
+                 <p>Show QR-code when requested</p>
+              </div>
+           </div>
+        </div>
+     </div>
+     <a href="#" class="btn">Download</a>
+     {% endfor %}
+  </main>
+ </body>
+ </html>
 
