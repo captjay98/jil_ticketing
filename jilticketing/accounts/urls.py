@@ -12,6 +12,6 @@ urlpatterns = [
     path("trips", views.TripsView, name="trips"),
     path("book", views.BookingView, name="book"),
     path("confirm", views.ConfirmView, name="confirm"),
-    path("seat", views.SeatView, name="seat"),
+    # path("seat", views.SeatView, name="seat"),
     path("payment", views.PayView, name="payment"),
 ]

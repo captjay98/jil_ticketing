@@ -354,8 +354,6 @@ def BookingView(request):
             messages.error(request, "Please Select a Ticket")
         else:
             return redirect("payment")
-    else:
-        return HTTPResponse("<h1> Payment Failed </h1>")
 
     context = {"tickettypes": tickettypes}
     return render(request, "accounts/book.html", context)
@@ -376,23 +374,35 @@ def PayView(request):
         ticket_choice_id = int(ticket_choice_id)
 
         tc = Ticket.objects.filter(trip=trip_choice)
-        bc = Ticket.objects.filter(trip=trip_choice, ticket_type=ticket_choice_id)
+        # bct = TicketType.objects.filter(trip=trip_choice, seat_class="Business")
+        bc = Ticket.objects.filter(trip=trip_choice, ticket_type=10)
+        ec = Ticket.objects.filter(trip=trip_choice, ticket_type=9)
+
+        ticketcount = tc.count()
+        print("TICKET", ticketcount)
+        businesscount = bc.count()
+        print("Business", businesscount)
+        economycount = ec.count()
+        print("Economy", economycount)
 
         if ticket_choice_class == "economy":
-            if tc.count == 11:
-                messages.info("Sorry, We are out of Economy class tickets.")
+            if ticketcount >= 20:
+                messages.info(request, "Sorry, We are out of Economy class tickets.")
+                return redirect("book")
             else:
-                seat = 20 - tc.count() - bc.count()
+                seat = 10 + 1 + economycount
 
         elif ticket_choice_class == "business":
-            if tc.count == 10:
-                messages.info("Sorry, We are out of Business class tickets.")
+            if ticketcount >= 10:
+                messages.info(request, "Sorry, We are out of Business class tickets.")
+                return redirect("book")
             else:
-                seat = tc.count() + 1
+                seat = businesscount + 1
 
         ticket = Ticket.objects.create(
             ticket_type_id=ticket_choice_id, trip_id=trip_choice, seat=seat
         )
+
         ticket.save()
 
         booking = Booking.objects.create(user_id=request.user.id, ticket_id=ticket.id)
@@ -431,3 +441,16 @@ def Download(request):
 
     # create the logic to download a ticket
     pass
+
+
+def QrCode(request):
+
+    # create a qrcode for the ticket
+    pass
+
+
+# so i am just going to be writing giberish till
+
+# or i will lose my strak and i do not want that to happen
+
+# because it will suck
