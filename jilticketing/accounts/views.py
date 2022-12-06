@@ -9,7 +9,7 @@ from django.shortcuts import redirect, render
 
 from .models import Booking, Ticket, TicketType, Trip, User
 
-# Create your views here.
+# Create your views here. okay
 
 
 def home(request):
@@ -40,6 +40,20 @@ def home(request):
 
         return render(request, "accounts/reghome.html", context)
     else:
+        if request.method == "POST":
+            departure = request.POST.get("departure")
+            destination = request.POST.get("destination")
+            date = request.POST.get("date")
+
+            print("DEPARTURE::", departure)
+            print("DESTINATION::", destination)
+            print("DATE::", date)
+
+            request.session["departure"] = departure
+            request.session["destination"] = destination
+            request.session["date"] = date
+
+            return redirect("trip")
         return render(request, "accounts/home.html")
 
 
@@ -203,7 +217,11 @@ def TripsView(request):
     if request.method == "POST":
         trip_choice = request.POST.get("trip")
 
-        if trip_choice is not None:
+        if request.user.is_authenticated == False:
+            messages.error(request, "Sorry. You have to login before booking. ")
+            return redirect("login")
+
+        elif trip_choice is not None:
             trip_choice = int(trip_choice)
 
             request.session["trip"] = trip_choice
@@ -216,29 +234,9 @@ def TripsView(request):
     return render(request, "accounts/trips.html", context)
 
 
+"""
 def SeatView(request, trip, seattype):
-    availableSeats = [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-    ]
+    availableSeats = 2  # [1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,]
 
     if seattype == "business":
         for seat in availableSeats:
@@ -266,7 +264,6 @@ def SeatView(request, trip, seattype):
     return render(request, "accounts/seat.html")
 
 
-"""
 def SeatCheck(trip, ticket, seattype):
     if trip == trip:
         if ticket % 2 != 0:
@@ -292,7 +289,7 @@ def SeatCheck(trip, ticket, seattype):
     11O11]
     sit = seat[1]
     seat[1] = x
-    '''if trip_choice == 3:
+            if trip_choice == 3:
                 if ticket_choice % 2 != 0:
                     if Ticket.kdEconomy == 11:
                         messages.info(request,
@@ -329,8 +326,6 @@ def SeatCheck(trip, ticket, seattype):
                     messages.info(request, "Invalid Ticket Code")
             else:
                 messages.info(request, "Invalid Trip")
-            '''
-            
 """
 
 
@@ -351,62 +346,79 @@ def BookingView(request):
         ticket_choice = ticket_choice.split(" ")
         ticket_choice_id = ticket_choice[0]
         ticket_choice_class = ticket_choice[1].lower()
+        request.session["ticket_choice_id"] = ticket_choice_id
+        request.session["ticket_choice_class"] = ticket_choice_class
         print(ticket_choice)
 
         if ticket_choice is None:
             messages.error(request, "Please Select a Ticket")
         else:
-            ticket_choice_id = int(ticket_choice_id)
-
-            tc = Ticket.objects.filter(trip=trip_choice)
-            bc = Ticket.objects.filter(trip=trip_choice, ticket_type=ticket_choice_id)
-
-            if ticket_choice_class == "economy":
-                if tc.count == 11:
-                    messages.info("Sorry, We are out of Economy class tickets.")
-                else:
-                    seat = 20 - tc.count() - bc.count()
-
-            elif ticket_choice_class == "business":
-                if tc.count == 10:
-                    messages.info("Sorry, We are out of Business class tickets.")
-                else:
-                    seat = tc.count() + 1
-
-            ticket = Ticket.objects.create(
-                ticket_type_id=ticket_choice_id, trip_id=trip_choice, seat=seat
-            )
-            ticket.save()
-
-            booking = Booking.objects.create(
-                user_id=request.user.id, ticket_id=ticket.id
-            )
-
-            booking.save()
-            """messages.success(
-                request, "Please confirm your booking info and" " download ticket"
-            )"""
-            return redirect("confirm")
+            return redirect("payment")
 
     context = {"tickettypes": tickettypes}
     return render(request, "accounts/book.html", context)
 
 
+def PayView(request):
+    """
+    Allows users to make payments
+    via a debit or Credit Card
+    """
+    if request.method == "POST":
+
+        trip_choice = request.session.get("trip")
+        ticket_choice_id = request.session.get("ticket_choice_id")
+        ticket_choice_class = request.session.get("ticket_choice_class")
+
+        trip_choice = int(trip_choice)
+        ticket_choice_id = int(ticket_choice_id)
+
+        tc = Ticket.objects.filter(trip=trip_choice)
+        # bct = TicketType.objects.filter(trip=trip_choice, seat_class="Business")
+        bc = Ticket.objects.filter(trip=trip_choice, ticket_type=10)
+        ec = Ticket.objects.filter(trip=trip_choice, ticket_type=9)
+
+        ticketcount = tc.count()
+        print("TICKET", ticketcount)
+        businesscount = bc.count()
+        print("Business", businesscount)
+        economycount = ec.count()
+        print("Economy", economycount)
+
+        if ticket_choice_class == "economy":
+            if ticketcount >= 20:
+                messages.info(request, "Sorry, We are out of Economy class tickets.")
+                return redirect("book")
+            else:
+                seat = 10 + 1 + economycount
+
+        elif ticket_choice_class == "business":
+            if ticketcount >= 10:
+                messages.info(request, "Sorry, We are out of Business class tickets.")
+                return redirect("book")
+            else:
+                seat = businesscount + 1
+
+        ticket = Ticket.objects.create(
+            ticket_type_id=ticket_choice_id, trip_id=trip_choice, seat=seat
+        )
+
+        ticket.save()
+
+        booking = Booking.objects.create(user_id=request.user.id, ticket_id=ticket.id)
+
+        booking.save()
+
+        return redirect("confirm")
+    return render(request, "accounts/pay.html")
+
+
 @login_required(login_url="login")
 def ConfirmView(request):
     """
-    Shows the booking information
+    Shows the last booking information
+    if not before trip date
     """
-
-    """
-    ticketclass = request.session.get('ticket')
-    ticketclass = int(ticketclass)
-    tripchoice = request.session.get('trip')
-    tripchoice = int(tripchoice)"""
-
-    # print("TICKETCLASS ID", ticketclass, type(ticketclass))
-    # print("TRIPCHOICE ID:", tripchoice, type(tripchoice))
-    # filter the bookings by ascendig order and pick out the latest
 
     if request.method == "GET":
         bookingconfirm = Booking.objects.filter(user_id=request.user.id).order_by(
@@ -419,7 +431,26 @@ def ConfirmView(request):
 
     else:
         return HTTPResponse(
-            "You do not have an active booking,\
+            "<h1>You do not have an active booking,\
                             Please visit your profile\
-                            and check previous Bookings."
+                            and check previous Bookings.</h1>"
         )
+
+
+def Download(request):
+
+    # create the logic to download a ticket
+    pass
+
+
+def QrCode(request):
+
+    # create a qrcode for the ticket
+    pass
+
+
+# so i am just going to be writing giberish till
+
+# or i will lose my strak and i do not want that to happen
+
+# because it will suck

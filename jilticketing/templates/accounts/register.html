@@ -1,7 +1,8 @@
+
 {% extends 'main.html' %}
 {% load static %}
+
 {% block content %}
-<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,13 +24,13 @@
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" placeholder="First name"
-              id="fname", name="first_name"/>
+              id="fname", name="first_name" required/>
           </div>
 
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" placeholder="Lastname"
-              id="lname" name="last_name"/>
+              id="lname" name="last_name" required/>
           </div>
 
           <div class="input-field">
