@@ -13,7 +13,6 @@
 * [Setup and Installation](#setup-and-installation)
 * [Contributors](#contributors)
 * [Acknowledgment](#acknowledgment)
-* [Team Links](#team-links)
 
 ## Overview
 __About Us__
@@ -142,13 +141,13 @@ After making edits, type the below command in your terminal
 
 ## Contributors
 
-|__Name__ | __Github Profile__|
-|:--------|:------------------|
+|__Name__ |
+|:--------|
 | [Adefila Islamiyyah Adebimpe](https://github.com/MiyyahCodes)
 | [Jamal Umar Ibrahim](https://github.com/captjay98)
 
 ## Acknowledgment 
-<img src="https://i.imgur.com/s1LfpPD.jpg" width="200" height="50">
+<img src="https://i.imgur.com/s1LfpPD.jpg" height="200px">
 
 Appreciating the [ALX Africa team](https://www.alxafrica.com/) for this wonderful initiative.
 During the course of this program we have been stretched beyond their limits going outside of their comfort zone seeking solutions, which has broaden their scope.
