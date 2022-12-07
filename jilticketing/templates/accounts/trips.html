@@ -23,20 +23,76 @@
 <section class="trips">
   <form action='' method="post">  
     {% csrf_token %}
-      {% for trip in trips %}
+      
 
     <div class="trip">
-        <p>From {{trip.departure}} To {{trip.destination}}</p>
-        <input type="radio" name="trip"  value="{{trip.id}}">
-        <p>{{trip.date}}</p>
+        <p>From </p>
+        
+        <p></p>
     </div>
       
-        {% endfor %}
+        
 </section>
 <div class="submission">
   <input type="submit" value="Select" class="submitbutton">
 </div>
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination</title>
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'styles/destination.css' %}">
+  <!-- custom js file link  -->
+  <script src="js/app.js" defer></script>
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+
+<h1 class="demo-title">
+  All Available Trips<br>
+</h1>
+<div class="pricing-table">
+  <form action='' method="post">  
+    {% csrf_token %}
+  {% for trip in trips %}
+  <div class="ptable-item">
+      <div class="ptable-single">
+          <div class="ptable-header">
+              <div class="ptable-title">
+                  <h2>{{trip.departure}} <br>To<br> {{trip.destination}}</h2>
+              </div>
+             
+          </div>
+          <div class="ptable-body">
+              <div class="ptable-description">
+                  <ul>
+                      <li>Date: {{trip.date}}</li>
+                      <li> Departure Time: {{trip.departure_time}}</li>
+                      <li> Arrival Time: {{trip.arrival_time}}</li>
+                     
+                  </ul>
+              </div>
+          </div>
+          <div class="ptable-footer">
+              <div class="ptable-action">
+                
+                <a>
+                  <input type="radio" name="trip"  value="{{trip.id}}">
+                  <input type="submit" value="Book" class="submitbutton">
+                </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</form>
+</body>
   
 
 {% endblock content %}

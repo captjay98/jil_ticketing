@@ -144,8 +144,7 @@ class Ticket(models.Model):
     trip = models.ForeignKey("Trip", related_name="trips", on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f"{self.trip.departure} to {self.trip.destination}\
-                {self.ticket_type.seat_class} {self.id}"
+        return f"{self.trip.departure} to {self.trip.destination}"
 
 
 class TicketType(models.Model):

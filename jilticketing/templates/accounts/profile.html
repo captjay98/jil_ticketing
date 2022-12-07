@@ -17,36 +17,141 @@
   {% endfor %}
 </div>
 
-<h1>{{user.username}} PROFILE</h1>
 
-<h5>Full Name</h5>
-<p>{{user.first_name}} {{user.last_name}}</p>
-<h4>Username</h4>
-<p>{{user.username}}</p>
-<h4>Email</h4>
-<p>{{user.email}}</p>
-<h4>Phone Number</h4>
-<p>{{user.phone_number}}</p>
-<h4>Date of Birth</h4>
-<p>{{user.date_of_birth}}</p>
-<h4>State</h4>
-<p>{{user.state}}</p>
-<h4>Date Joined</h4>
-<p>{{user.date_joined}}</p>
+
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+      <!-- font awesome cdn link  -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <!-- custom js file link  -->
+    <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="greetings">
+      <h4>Hello, {{user.first_name}}</h4>
+    </div>
+    <div class="container rounded bg-white mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold h2">{{user.username}}</span><span class="text-black-50 h4">{{user.email}}</span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right h1">Profile</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels h4">Name</label><input type="text" class="form-control form" placeholder="{{user.first_name}}" value=""></div>
+                        <div class="col-md-6"><label class="labels h4">Surname</label><input type="text" class="form-control form" value="" placeholder="{{user.last_name}}"></div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12 mt-2"><label class="labels h4">Date of Birth</label><input type="text" class="form-control form" placeholder="{{user.date_of_birth}}" value=""></div>
+                        <div class="col-md-12 mt-2"><label class="labels h4">State</label><input type="text" class="form-control form" placeholder="{{user.stae}}" value=""></div>
+                        <div class="col-md-12 mt-2"><label class="labels h4">Email</label><input type="text" class="form-control form" placeholder="{{user.email}}" value=""></div>
+                        <div class="col-md-12 mt-2"><label class="labels h4">Username</label><input type="text" class="form-control form" placeholder="{{user.username}}" value=""></div>
+                        <div class="col-md-12 mt-2"><label class="labels h4">Date Joined</label><input type="text" class="form-control form" placeholder="{{user.date_joined}}" value=""></div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="col-md-6"><label class="labels h4">State/Region</label><input type="text" class="form-control form" value="" placeholder="state"></div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="button btn-primary profile-button" type="button">Save Profile</button></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right h1">Trip History</h4>
+                    {% for booking in bookings %}
+                </div>
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                      <div class="col-md-5">
+                        <!--<img src="{% static 'img/home-images/ibd-sta.jpg' %}" class="img-fluid rounded-start trip" alt="...">-->
+                      </div>
+                      <div class="col-md-7">
+                        <div class="card-body">
+                          <h5 class="card-title h3">{{booking}}</h5>
+                          <p class="card-text h5">Date : {{booking.ticket.trip.date}}</p>
+                          <p class="card-text h5">Class : {{booking.ticket.ticket_type.seat_class}}</p>
+                          <p class="card-text h5">Seat : {{booking.ticket.seat}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!--<div class="card mb-3" style="max-width: 560px;">
+                    <div class="row g-0">
+                      <div class="col-md-5">
+                        <img src="../miyyah/img/home-images/abj-sta.png" class="img-fluid rounded-start trip" alt="...">
+                      </div>
+                      <div class="col-md-7">
+                        <div class="card-body">
+                          <h5 class="card-title h3">Abuja to Lagos</h5>
+                          <p class="card-text h5">Departure : 10/10/22</p>
+                          <p class="card-text h5">Class : Economy</p>
+                          <p class="card-text h5">Seat : 70C</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="card mb-3" style="max-width: 560px;">
+                    <div class="row g-0">
+                      <div class="col-md-5">
+                        <img src="../miyyah/img/home-images/kaduna-sta.jpg" class="img-fluid rounded-start trip" alt="...">
+                      </div>
+                      <div class="col-md-7">
+                        <div class="card-body">
+                          <h5 class="card-title h3">Kaduna to Abuja</h5>
+                          <p class="card-text h5">Departure : 20/11/22</p>
+                          <p class="card-text h5">Class : Business</p>
+                          <p class="card-text h5">Seat : 5B</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    </div>
+    </div>
+
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+
+        AOS.init({
+            duration: 800,
+            offset: 150,
+        });
+
+    </script>
+
+</body>
+</html>
    
     
 
 
 
 <h3> Previous Bookings </h3>
-{% for booking in bookings %}
-    <h3>{{booking}}</h3>
-    <h3>{{booking.ticket.trip.departure}} to {{booking.ticket.trip.destination}}</h3>
-    <h3>{{booking.ticket.ticket_type.seat_class}}</h3>
-    <h3>{{booking.ticket.seat}}</h3>
+
+    <h3></h3>
+    <h3> to {{booking.ticket.trip.destination}}</h3>
+    <h3></h3>
+    <h3></h3>
     <h3>{{booking.ticket.trip.date}}</h3>
-{% endfor %}
+
 
  {% endblock content %}
 
