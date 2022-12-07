@@ -1,0 +1,52 @@
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+.container{
+    margin-top: 100px;
+}
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+.form{
+    font-size: 1.7rem !important;
+}
+.button {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 1rem 3rem;
+    font-size: 1.7rem;
+    color: #0078D7;
+    border: 0.2rem solid #0078D7;
+    border-radius: 5rem;
+    cursor: pointer;
+    background: none;
+  }
+  
+  .button:hover {
+    background: #0078D7;
+    color: #f8f9fc;
+  }
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+/* .trip{
+    height: 120px !important;
+} */
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+@media(min-width:765px){
+    .trip{
+        height: 120px !important;
+    }
+}
