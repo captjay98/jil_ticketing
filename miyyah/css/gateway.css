@@ -16,6 +16,7 @@
   padding:25px;
   min-height: 100vh;
   background: #0078D7;
+  margin-top: 80px;
 }
 
 .container form{
@@ -49,13 +50,14 @@
 .container form .row .col .inputBox span{
   margin-bottom: 10px;
   display: block;
+  font-size: 1.8rem;
 }
 
 .container form .row .col .inputBox input{
   width: 100%;
   border:1px solid #ccc;
   padding:10px 15px;
-  font-size: 15px;
+  font-size: 1.5rem;
   text-transform: none;
 }
 
