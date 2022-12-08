@@ -15,7 +15,7 @@ input {
   position: relative;
   width: 100%;
   background-color: #fff;
-  min-height: 800px;
+  min-height: 850px;
   overflow: hidden;
   margin-top: 80px;
 }
@@ -94,7 +94,7 @@ form.sign-in-form {
   border: none;
   line-height: 1;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: #333;
 }
 
