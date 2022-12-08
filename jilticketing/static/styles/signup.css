@@ -15,7 +15,7 @@ input {
   position: relative;
   width: 100%;
   background-color: #fff;
-  min-height: 100vh;
+  min-height: 800px;
   overflow: hidden;
   margin-top: 80px;
 }
@@ -94,7 +94,7 @@ form.sign-in-form {
   border: none;
   line-height: 1;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: #333;
 }
 
@@ -127,6 +127,7 @@ form.sign-in-form {
   text-decoration: none;
   font-size: 2rem;
   transition: 0.3s;
+ 
 }
 
 .social-icon:hover {

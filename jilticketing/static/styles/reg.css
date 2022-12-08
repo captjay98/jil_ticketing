@@ -17,6 +17,7 @@ input {
   background-color: #fff;
   min-height: 100vh;
   overflow: hidden;
+  margin-top: 80px;
 }
 
 .forms-container {
@@ -39,7 +40,7 @@ input {
   z-index: 5;
 }
 
-form {
+.forms {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +62,7 @@ form.sign-in-form {
 }
 
 .title {
-  font-size: 2.2rem;
+  font-size: 4rem;
   color: #444;
   margin-bottom: 10px;
 }
@@ -84,7 +85,7 @@ form.sign-in-form {
   line-height: 55px;
   color: #acacac;
   transition: 0.5s;
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 .input-field input {
@@ -93,18 +94,19 @@ form.sign-in-form {
   border: none;
   line-height: 1;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: #333;
 }
 
 .input-field input::placeholder {
   color: #aaa;
   font-weight: 500;
+  font-size: 1.8rem;
 }
 
 .social-text {
   padding: 0.7rem 0;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 .social-media {
@@ -123,7 +125,7 @@ form.sign-in-form {
   border-radius: 50%;
   border: 1px solid #333;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 2rem;
   transition: 0.3s;
 }
 
@@ -132,7 +134,7 @@ form.sign-in-form {
   border-color: #4481eb;
 }
 
-.btn {
+.button {
   width: 150px;
   background-color: #5995fd;
   border: none;
@@ -142,6 +144,7 @@ form.sign-in-form {
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
+  font-size: 1.5rem;
   margin: 10px 0;
   cursor: pointer;
   transition: 0.5s;
@@ -209,11 +212,11 @@ form.sign-in-form {
 .panel h3 {
   font-weight: 600;
   line-height: 1;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 .panel p {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   padding: 0.7rem 0;
 }
 
@@ -224,7 +227,7 @@ form.sign-in-form {
   width: 130px;
   height: 41px;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
 }
 
 .right-panel .image,
@@ -333,19 +336,14 @@ a {
     transition-delay: 0.8s;
   }
 
-  .panel h3 {
-    font-size: 1.2rem;
-  }
 
   .panel p {
-    font-size: 0.7rem;
     padding: 0.5rem 0;
   }
 
   .btn.transparent {
     width: 110px;
     height: 35px;
-    font-size: 0.7rem;
   }
 
   .container:before {
@@ -387,7 +385,7 @@ a {
 }
 
 @media (max-width: 570px) {
-  form {
+  .forms {
     padding: 0 1.5rem;
   }
 
