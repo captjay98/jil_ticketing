@@ -73,7 +73,6 @@ def RegisterView(request):
         email = request.POST["email"]
         phone_number = request.POST["phone_number"]
         state = request.POST["state"]
-        date_of_birth = request.POST["date_of_birth"]
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
 
@@ -98,7 +97,6 @@ def RegisterView(request):
                     email=email,
                     phone_number=phone_number,
                     state=state,
-                    date_of_birth=date_of_birth,
                     password=password1,
                 )
                 user.save()
@@ -374,7 +372,6 @@ def PayView(request):
         ticket_choice_id = int(ticket_choice_id)
 
         tc = Ticket.objects.filter(trip=trip_choice)
-        # bct = TicketType.objects.filter(trip=trip_choice, seat_class="Business")
         bc = Ticket.objects.filter(trip=trip_choice, ticket_type=10)
         ec = Ticket.objects.filter(trip=trip_choice, ticket_type=9)
 
@@ -447,10 +444,3 @@ def QrCode(request):
 
     # create a qrcode for the ticket
     pass
-
-
-# so i am just going to be writing giberish till
-
-# or i will lose my strak and i do not want that to happen
-
-# because it will suck

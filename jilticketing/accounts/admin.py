@@ -7,18 +7,37 @@ from .models import Booking, Ticket, TicketType, Trip, User
 
 
 class User_Admin(UserAdmin):
-    list_display = ("id", "username", "email", "first_name", "last_name",
-                    "phone_number",  "date_of_birth", "state",
-                    "date_joined", "last_login", "is_admin", "is_staff")
-    search_fields = ("id", "email", "username", "phone_number", )
-    readonly_fields = ("id", "date_joined", "last_login",)
+    list_display = (
+        "id",
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "state",
+        "date_joined",
+        "last_login",
+        "is_admin",
+        "is_staff",
+    )
+    search_fields = (
+        "id",
+        "email",
+        "username",
+        "phone_number",
+    )
+    readonly_fields = (
+        "id",
+        "date_joined",
+        "last_login",
+    )
 
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
- 
- 
-admin.site.register(User, User_Admin)   
+
+
+admin.site.register(User, User_Admin)
 
 
 class Booking_Admin(admin.ModelAdmin):
@@ -30,8 +49,15 @@ admin.site.register(Booking, Booking_Admin)
 
 
 class Ticket_Admin(admin.ModelAdmin):
-    list_display = ("id", "ticket_type", "seat", "trip",
-                    "generated_at", "expires_at", "serial_number")
+    list_display = (
+        "id",
+        "ticket_type",
+        "seat",
+        "trip",
+        "generated_at",
+        "expires_at",
+        "serial_number",
+    )
     search_fields = ("serial_number", "ticket_type", "trip")
 
 
@@ -47,7 +73,16 @@ admin.site.register(TicketType, TicketType_Admin)
 
 
 class Trip_Admin(admin.ModelAdmin):
-    list_display = ("id", "name", "date", "departure", "departure_time", "destination", "arrival_time")
+    list_display = (
+        "id",
+        "name",
+        "date",
+        "departure",
+        "departure_time",
+        "destination",
+        "arrival_time",
+    )
     search_fields = ("id", "name", "date", "departure", "destination")
-    
+
+
 admin.site.register(Trip, Trip_Admin)
