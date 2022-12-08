@@ -1,98 +1,154 @@
-{% extends "main.html" %}
-
 {% load static %}
-
-{% block content %}
-<section class="infobar">
-  <h1>Hello {{user.username}},</br>SELECT YOUR TRIP. </h1> 
-</section>
-
-
-<div class="errorcodes">
-  <style>
-    .errorcodes {
-      background-color:black;
-      color:red;
-    }
-  </style>
-  {% for message in messages %}
-      <h3 style="color:red">{{ message }}</h3>
-  {% endfor %}
-</div>
-
-<section class="trips">
-  <form action='' method="post">  
-    {% csrf_token %}
-      
-
-    <div class="trip">
-        <p>From </p>
-        
-        <p></p>
-    </div>
-      
-        
-</section>
-<div class="submission">
-  <input type="submit" value="Select" class="submitbutton">
-</div>
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Destination</title>
-  <!-- font awesome cdn link  -->
-  <link rel="stylesheet"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="{% static 'styles/destination.css' %}">
-  <!-- custom js file link  -->
-  <script src="js/app.js" defer></script>
-  <link rel="stylesheet"
+    <link rel="stylesheet" href="{% static 'styles/destination.css' %}">
+    <!-- custom js file link  -->
+    <script src="{% static 'js/app.js' %}" defer></script>
+    <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+  </head>
+  <body>
+    <!-- header section starts  -->
 
-<h1 class="demo-title">
-  All Available Trips<br>
-</h1>
-<div class="pricing-table">
-  <form action='' method="post">  
-    {% csrf_token %}
-  {% for trip in trips %}
-  <div class="ptable-item">
-      <div class="ptable-single">
-          <div class="ptable-header">
+    <header class="header">
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+
+      <a data-aos="zoom-in-left" data-aos-delay="150" href="#"
+        class="logo"><span>🌍J</span>il <span>T</span>icketing
+      </a>
+
+      <div class="nav">
+        <a data-aos="zoom-in-left" data-aos-delay="300" href="{% url 'home' %}">Home</a>
+        <a data-aos="zoom-in-left" data-aos-delay="450" href="#about">About us</a>
+        <a data-aos="zoom-in-left" data-aos-delay="750" href="{% url 'trips' %}">Trips</a>
+        <a data-aos="zoom-in-left" data-aos-delay="450" href="#destination">Destinations</a>
+        <a data-aos="zoom-in-left" data-aos-delay="600" href="{% url 'profile' %}">Profile</a>
+    </div>
+<div>
+<a data-aos="zoom-in-left" data-aos-delay="1300" href="{% url 'logout' %}" class="btn">Logout</a>
+</div>
+    </header>
+
+    <!-- header section ends -->
+
+    <h1 class="demo-title">
+      All Available Trips<br>
+    </h1>
+    <div class="pricing-table">
+      {% for trip in trips %}
+      <div class="ptable-item">
+        <div class="ptable-single">
+          <form action='' method="post">
+            {% csrf_token %}
+            <div class="ptable-header">
               <div class="ptable-title">
-                  <h2>{{trip.departure}} <br>To<br> {{trip.destination}}</h2>
+
+                <h2>{{trip.departure}} <br>To<br> {{trip.destination}}</h2>
               </div>
-             
-          </div>
-          <div class="ptable-body">
+            </div>
+            <div class="ptable-body">
               <div class="ptable-description">
-                  <ul>
-                      <li>Date: {{trip.date}}</li>
-                      <li> Departure Time: {{trip.departure_time}}</li>
-                      <li> Arrival Time: {{trip.arrival_time}}</li>
-                     
-                  </ul>
+                <ul>
+                  <li>Date: {{trip.date}}</li>
+                  <li> Departure Time: {{trip.departure_time}}</li>
+                  <li> Arrival Time: {{trip.arrival_time}}</li>
+                </ul>
               </div>
-          </div>
-          <div class="ptable-footer">
+            </div>
+            <div class="ptable-footer">
               <div class="ptable-action">
-                
                 <a>
-                  <input type="radio" name="trip"  value="{{trip.id}}">
+                  <input type="radio" name="trip" value="{{trip.id}}">
                   <input type="submit" value="Book" class="submitbutton">
                 </a>
               </div>
+            </div>
           </div>
+        </div>
+        {% endfor %}
       </div>
-  </div>
-  {% endfor %}
-</form>
-</body>
-  
+      <!-- footer section starts  -->
 
-{% endblock content %}
+      <section class="footer">
+
+        <div class="box-container">
+
+          <div class="box" data-aos="fade-up" data-aos-delay="150">
+            <a href="#" class="logo"> <span>J</span>il <span>T</span>icketing
+            </a>
+            <p> We Aim To Provide A Hassle-Free Experience By Offering A
+              Simple And User-Friendly Platform.</p>
+            <div class="share">
+              <a href="#" class="fab fa-facebook-f"></a>
+              <a href="#" class="fab fa-twitter"></a>
+              <a href="#" class="fab fa-instagram"></a>
+              <a href="#" class="fab fa-linkedin"></a>
+            </div>
+          </div>
+
+          <div class="box" data-aos="fade-up" data-aos-delay="300">
+            <h3>quick links</h3>
+            <a href="#home" class="links"> <i class="fas
+                fa-arrow-right"></i> home </a>
+            <a href="#about" class="links"> <i class="fas
+                fa-arrow-right"></i> about </a>
+            <a href="#destination" class="links"> <i class="fas
+                fa-arrow-right"></i> destination </a>
+            <a href="#services" class="links"> <i class="fas
+                fa-arrow-right"></i> trips </a>
+            <a href="#gallery" class="links"> <i class="fas
+                fa-arrow-right"></i> Login </a>
+            <a href="#blogs" class="links"> <i class="fas
+                fa-arrow-right"></i> register </a>
+          </div>
+
+          <div class="box" data-aos="fade-up" data-aos-delay="450">
+            <h3>contact info</h3>
+            <p> <i class="fas fa-map"></i> Lagos, Nigeria </p>
+            <p> <i class="fas fa-phone"></i> +2348088636134 </p>
+            <p> <i class="fas fa-envelope"></i> jilticketing@mail.com
+            </p>
+            <p> <i class="fas fa-clock"></i> 7:00am - 10:00pm </p>
+          </div>
+
+          <div class="box" data-aos="fade-up" data-aos-delay="600">
+            <h3>newsletter</h3>
+            <p>subscribe for latest updates</p>
+            <form action="">
+              <input type="email" name="" placeholder="enter your
+                email" class="email" id="">
+              <input type="submit" value="subscribe" class="btn">
+            </form>
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="credit">Coded by <span>Jil Ticketing</span> | all rights
+        reserved!</div>
+
+      <!-- footer section ends -->
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+      <script>
+
+        AOS.init({
+            duration: 800,
+            offset: 150,
+        });
+
+    </script>
+    </body>
+  </html>
