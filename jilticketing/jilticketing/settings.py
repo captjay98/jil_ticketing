@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-^9h!-&ob+#kpu*@cwnd62fbl8d(_iv$@swu(n!ils8lx&jls26"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
-ALLOWED_HOSTS = ["52.206.252.171"]
+ALLOWED_HOSTS = ["52.206.252.171", "34.202.157.254", "jilticketing.tk", "www.jilticketing.tk"]
 
 AUTH_USER_MODEL = "accounts.USER"
 """AUTHENTICATION_BACKENDS = (
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Nigeria/Lagos"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -127,8 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -1,0 +1,33 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 08, 2022 - 15:48:58
+Django version 4.1.4, using settings 'jilticketing.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+/home/ubuntu/jil_ticketing/jilticketing/jilticketing/settings.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+December 08, 2022 - 15:49:11
+Django version 4.1.4, using settings 'jilticketing.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Watching for file changes with StatReloader
+[2022-12-08 20:58:00 +0000] [21300] [INFO] Starting gunicorn 20.0.2
+[2022-12-08 20:58:00 +0000] [21300] [INFO] Listening at: http://0.0.0.0:8000 (21300)
+[2022-12-08 20:58:00 +0000] [21300] [INFO] Using worker: sync
+[2022-12-08 20:58:00 +0000] [21303] [INFO] Booting worker with pid: 21303
+[2022-12-08 20:58:07 +0000] [21300] [INFO] Handling signal: int
+[2022-12-08 20:58:07 +0000] [21300] [INFO] Shutting down: Master
+[2022-12-08 20:58:16 +0000] [21308] [INFO] Starting gunicorn 20.0.2
+[2022-12-08 20:58:16 +0000] [21308] [INFO] Listening at: http://0.0.0.0:8000 (21308)
+[2022-12-08 20:58:16 +0000] [21308] [INFO] Using worker: sync
+[2022-12-08 20:58:16 +0000] [21311] [INFO] Booting worker with pid: 21311
+[2022-12-08 21:19:24 +0000] [21308] [CRITICAL] WORKER TIMEOUT (pid:21311)
+[2022-12-08 21:19:24 +0000] [21311] [INFO] Worker exiting (pid: 21311)
+[2022-12-08 21:19:24 +0000] [23316] [INFO] Booting worker with pid: 23316
+[2022-12-08 21:35:43 +0000] [21308] [INFO] Handling signal: term
+[2022-12-08 21:35:43 +0000] [21308] [INFO] Shutting down: Master
