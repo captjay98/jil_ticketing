@@ -23,7 +23,7 @@ __Mission__
 
 Jil Is Committed To Making Train Ticketing Easy And Convenient For Customers. We Aim To Provide A Hassle-Free Experience By Offering A Simple And User-Friendly Platform. We Will Continue To Innovate And Improve Our Services So That Our Customers Can Enjoy A Seamless Journey
 
-__Live Link__: coming soon
+__Live Link__: https://jilticketing.onrender.com/ 
 
 __Project Status__: _in progress_
 
