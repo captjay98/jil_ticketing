@@ -17,7 +17,6 @@ class MyAccountManager(BaseUserManager):
         email,
         username,
         phone_number,
-        state,
         password=None,
     ):
         """Handles creation of other users"""
@@ -31,7 +30,6 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             phone_number=phone_number,
-            state=state,
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -83,7 +81,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name} {self.last_name}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

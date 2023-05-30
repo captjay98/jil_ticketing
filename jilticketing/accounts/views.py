@@ -72,7 +72,6 @@ def RegisterView(request):
         username = request.POST["username"]
         email = request.POST["email"]
         phone_number = request.POST["phone_number"]
-        state = request.POST["state"]
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
 
@@ -96,7 +95,6 @@ def RegisterView(request):
                     username=username,
                     email=email,
                     phone_number=phone_number,
-                    state=state,
                     password=password1,
                 )
                 user.save()
