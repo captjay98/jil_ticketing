@@ -20,7 +20,7 @@
 
     <!-- custom js file link  -->
     <script src="{% static 'js/app.js' %}" defer></script>
-    <title>Sign in & Sign up Form</title>
+    <title>Sign up</title>
   </head>
   <body>
     <!-- header section starts  -->
@@ -51,7 +51,8 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form forms">
+          <form action="" method="post" class="sign-in-form forms">
+            {% csrf_token %}
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>

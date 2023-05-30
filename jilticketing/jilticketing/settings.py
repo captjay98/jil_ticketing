@@ -9,32 +9,31 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import environ
 import os
 from pathlib import Path
 from tempfile import template
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^9h!-&ob+#kpu*@cwnd62fbl8d(_iv$@swu(n!ils8lx&jls26"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+SECRET_KEY = env("SECRET_KEY") 
 
-ALLOWED_HOSTS = ["52.206.252.171", "34.202.157.254", "jilticketing.tk", "www.jilticketing.tk"]
+DEBUG = env("DEBUG") 
 
+# ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['*'])
+ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "accounts.USER"
-"""AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    "accounts.backends.CaseInsensitiveModelBackend"
-)"""
-# Application definition
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     "accounts",
 ]
 
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -56,7 +56,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
 ROOT_URLCONF = "jilticketing.urls"
+
 
 TEMPLATES = [
     {
@@ -76,24 +78,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "jilticketing.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "jil_ticketing",
-        "USER": "jiladmin",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": "3306",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "jiltic",
+#         "USER": "postgres",
+#         "PASSWORD": "TaDmsOKMh60JQ35",
+#         "HOST": "dbjil.fly.dev",
+#         "PORT": "5433",
+#     }
+# }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+# DATABASES = {
+#     'default': env.db(),
+
+#     'extra': env.db_url(
+#         'SQLITE_URL',
+#         default='sqlite:////tmp/my-tmp-sqlite.db'
+#     )
+# }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -111,9 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -123,19 +132,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
