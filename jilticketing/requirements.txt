@@ -1,6 +1,7 @@
 asgiref==3.7.2
 backports.zoneinfo==0.2.1
-Django==4.2.1
+Django==3.2.19
+
 django-environ==0.10.0
 psycopg==3.1.9
 sqlparse==0.4.4
