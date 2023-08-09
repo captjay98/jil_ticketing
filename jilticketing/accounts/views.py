@@ -110,7 +110,6 @@ def RegisterView(request):
 
 
 def LoginView(request):
-
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
@@ -213,8 +212,11 @@ def TripsView(request):
     if request.method == "POST":
         trip_choice = request.POST.get("trip")
 
-        if request.user.is_authenticated == False:
-            messages.error(request, "Sorry. You have to login before booking. ")
+        if request.user.is_authenticated is False:
+            messages.error(
+                request,
+                "Sorry. You have to login before booking. ",
+            )
             return redirect("login")
 
         elif trip_choice is not None:
@@ -276,7 +278,6 @@ def SeatCheck(trip, ticket, seattype):
                 seattype += 1
                 seat = seattype
     return seat
-    
     create seats
     [11O11
     11O11
@@ -361,7 +362,6 @@ def PayView(request):
     via a debit or Credit Card
     """
     if request.method == "POST":
-
         trip_choice = request.session.get("trip")
         ticket_choice_id = request.session.get("ticket_choice_id")
         ticket_choice_class = request.session.get("ticket_choice_class")
@@ -382,14 +382,20 @@ def PayView(request):
 
         if ticket_choice_class == "economy":
             if ticketcount >= 20:
-                messages.info(request, "Sorry, We are out of Economy class tickets.")
+                messages.info(
+                    request,
+                    "Sorry, We are out of Economy class tickets.",
+                )
                 return redirect("book")
             else:
                 seat = 10 + 1 + economycount
 
         elif ticket_choice_class == "business":
             if ticketcount >= 10:
-                messages.info(request, "Sorry, We are out of Business class tickets.")
+                messages.info(
+                    request,
+                    "Sorry, We are out of Business class tickets.",
+                )
                 return redirect("book")
             else:
                 seat = businesscount + 1
@@ -400,7 +406,10 @@ def PayView(request):
 
         ticket.save()
 
-        booking = Booking.objects.create(user_id=request.user.id, ticket_id=ticket.id)
+        booking = Booking.objects.create(
+            user_id=request.user.id,
+            ticket_id=ticket.id,
+        )
 
         booking.save()
 
@@ -416,7 +425,9 @@ def ConfirmView(request):
     """
 
     if request.method == "GET":
-        bookingconfirm = Booking.objects.filter(user_id=request.user.id).order_by(
+        bookingconfirm = Booking.objects.filter(
+            user_id=request.user.id,
+        ).order_by(
             "-id"
         )[:1]
 
@@ -433,12 +444,10 @@ def ConfirmView(request):
 
 
 def Download(request):
-
     # create the logic to download a ticket
     pass
 
 
 def QrCode(request):
-
     # create a qrcode for the ticket
     pass
