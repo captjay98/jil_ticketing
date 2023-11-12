@@ -175,8 +175,9 @@ section {
 }
 
 .home {
+  background-color: purple;
     margin: 0 auto;
-    margin-top: 1rem;
+    margin-top: 100px;
     width: 98%;
     border-radius: 1rem;
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(17, 17, 17, 0.3)), to(rgba(17, 17, 17, 0.3))), url(../images/home-bg.jpg) no-repeat;
