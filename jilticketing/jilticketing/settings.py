@@ -15,20 +15,17 @@ from pathlib import Path
 from tempfile import template
 
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env(DEBUG=(bool, False))
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
+SECRET_KEY = env("SECRET_KEY")
 
-SECRET_KEY = env("SECRET_KEY") 
-
-DEBUG = env("DEBUG") 
+DEBUG = env("DEBUG")
 
 # ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['*'])
 ALLOWED_HOSTS = ["*"]
@@ -80,9 +77,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "jilticketing.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -133,9 +130,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
