@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import environ
 import os
 from pathlib import Path
-from tempfile import template
 
 
 env = environ.Env(DEBUG=(bool, False))
