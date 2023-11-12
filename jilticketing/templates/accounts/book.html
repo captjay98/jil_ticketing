@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<section class="infobar">
+  <h1>Hello {{user.username}},</br> SELECT YOUR TICKET AND BOOK.</h1> 
+</section>
+
+<div class="errorcodes">
+  <style>
+    .errorcodes {
+      background-color:black;
+      color:blue;
+      width: 80%;
+    }
+  </style>
+  {% for message in messages %}
+      <h3 style="color:red">{{ message }}</h3>
+  {% endfor %}
+</div>
+
+
+  <form action='' method="post">
+  {% csrf_token %}
+  <h1 class="booker">SELECT CLASS</h1>
+<section class="booking">
+  
+  {% for tickettype in tickettypes %}
+
+  <div class="tickets">
+    <div class="ticket">  <h4>{{tickettype.trip.name}}</h4>
+  <h4>{{tickettype.seat_class}}</h4>
+  <h5>{{ticket.seat}} {{tickettype.price}}</h5>
+      <input type="radio" name="tickettype"  value="{{tickettype.id}} {{tickettype.seat_class}}"  >
+      </div>
+
+  </div>
+      </hr>
+      </br>
+      {% endfor %}
+    </section>
+    <div class="submission">
+      <input type="submit" value="Book" class="submitbutton">
+    </div>
+
+
+
+{% endblock content %}
+
+
